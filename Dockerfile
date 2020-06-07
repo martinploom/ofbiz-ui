@@ -10,6 +10,8 @@ WORKDIR /app
 
   # copy package.json related files first and install all required dependencies
 COPY package*.json ./
+RUN npm install url-loader
+RUN npm install style-loader
 RUN npm install
 
   # copy the rest of files and folders & install dependencies
