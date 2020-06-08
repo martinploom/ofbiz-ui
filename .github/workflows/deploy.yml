@@ -35,7 +35,7 @@ jobs:
           port: ${{ secrets.PORT }}
           envs: GITHUB_USERNAME, GITHUB_TOKEN
           script: |
-            docker stop docker.pkg.github.com/martinploom/ofbiz-ui/ofbiz-ui:latest
+            docker stop ofbiz_front
             docker system prune -af
             docker login docker.pkg.github.com -u $GITHUB_USERNAME -p $GITHUB_TOKEN
-            docker run -dit -p 80:80 docker.pkg.github.com/martinploom/ofbiz-ui/ofbiz-ui:latest
+            docker run -dit -p 80:80 -n ofbiz_front docker.pkg.github.com/martinploom/ofbiz-ui/ofbiz-ui:latest
