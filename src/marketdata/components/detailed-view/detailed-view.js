@@ -1,7 +1,7 @@
-import {HttpClient} from "aurelia-fetch-client";
-import {inject} from "aurelia-dependency-injection";
-import {MarketdataService} from "../../service/marketdata-service";
-import {Router} from "aurelia-router";
+import {HttpClient} from 'aurelia-fetch-client';
+import {inject} from 'aurelia-dependency-injection';
+import {MarketdataService} from '../../service/marketdata-service';
+import {Router} from 'aurelia-router';
 
 @inject(HttpClient, MarketdataService, Router)
 export class DetailedView {

@@ -1,12 +1,11 @@
 import { inject } from 'aurelia-dependency-injection';
-import { Store } from 'aurelia-store';
 import { autoinject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import {HttpClient} from 'aurelia-fetch-client';
 
 @autoinject
-@inject(Store, Router)
+@inject(Router)
 export class vaadinListview {
   baseUrl = 'api/generic/v1/entities/MarketdataModel';
   constructor(router) {
@@ -60,6 +59,6 @@ export class vaadinListview {
   }
 
   handleSelectCompany(companyName) {
-    this.router.navigateToRoute('detailed-view', {id: companyName});
+    this.router.navigateToRoute('detailed-view', { id: companyName });
   }
 }

@@ -123,7 +123,7 @@ const routes = {
       nav: true,
       title: 'Orders',
       name: 'orders'
-    },
+    }
   ],
   crm: [
     { route: '', redirect: 'complex' },
@@ -155,7 +155,7 @@ const routes = {
       name: 'orders',
       title: 'Orders',
       nav: true
-    },
+    }
   ],
   marketdata: [
     { route: '', redirect: 'companies' },
@@ -169,7 +169,7 @@ const routes = {
     {
       route: 'detailed-view/:id',
       moduleId: PLATFORM.moduleName('marketdata/components/detailed-view/detailed-view'),
-      name: 'detailed-view',
+      name: 'detailed-view'
     }
   ],
   cms: [], // TODO: add cms child routes here
