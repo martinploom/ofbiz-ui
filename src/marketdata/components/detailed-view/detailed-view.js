@@ -23,6 +23,7 @@ export class DetailedView {
 
     return client.fetch('data.json')
       .then(response => response.json())
-      .then(companies => this.companies = companies);
+      .then(companies => this.companies = companies)
+      .then((response) => (this.company = response[0]));
   }
 }

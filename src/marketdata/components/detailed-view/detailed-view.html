@@ -2,7 +2,7 @@
   <span class="border">
     <div class="col-md-10 my-5 mx-auto">
       <div>
-      <h3>${company}</h3>
+      <h3>${company.companyName}</h3>
       </div>
       <hr>
       <div class="mt-3">
@@ -10,15 +10,20 @@
       </div>
       <div class="row-marketdata" display="table">
         <div class="column-marketdata">
-            <dt class="font-weight-light" style="margin: 30px 0">REGISTRATION CODE</dt>
-            <dt class="font-weight-light" style="margin: 30px 0">EMPLOYEE COUNT</dt>
+            <dt class="font-weight-light">REGISTRATION CODE</dt>
+            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.registryCode}</dt>
+            <dt class="font-weight-light">EMPLOYEE COUNT</dt>
+            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.employeeCount}</dt>
         </div>
         <div class="column-marketdata">
-            <dt class="font-weight-light" style="margin: 30px 0">ADDRESS</dt>
+            <dt class="font-weight-light">ADDRESS</dt>
+            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.companyAddress}</dt>
             <dt class="font-weight-light">STATUS</dt>
+            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.companyStatus}</dt>
         </div>
         <div class="column-marketdata">
             <dt class="font-weight-light">SECTOR</dt>
+            <dt class="font-weight-normal" style="margin: 0 0 30px 0">-</dt>
         </div>
       </div>
       <div>

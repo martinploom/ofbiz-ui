@@ -4,69 +4,79 @@
     "registryCode": 12754230,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Õismäe tee 78-9",
-    "city": "Tallinn"
+    "city": "Tallinn",
+    "employeeCount": "43"
   },
   {
     "companyName": "001 Kinnisvara OÜ",
     "registryCode": 12652512,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Õismäe tee 78-9",
-    "city": "Tallinn"
+    "city": "Tallinn",
+    "employeeCount": "4"
   },
   {
     "companyName": "007 Autohaus osaühing",
     "registryCode": 11694365,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Parkla 6",
-    "city": "Tartu"
+    "city": "Tartu",
+    "employeeCount": "3"
   },
   {
     "companyName": "013 investment OÜ",
     "registryCode": 12937781,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Tartu mnt 18",
-    "city": "Tallinn"
+    "city": "Tallinn",
+    "employeeCount": "11"
   },
   {
     "companyName": "01Arvutiabi OÜ",
     "registryCode": 14112620,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Aru tn 19-5",
-    "city": "Tallinn"
+    "city": "Tallinn",
+    "employeeCount": "56"
   },
   {
     "companyName": "01 Creations Osaühing",
     "registryCode": 10818150,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Ahtri tn 12",
-    "city": "Tallinn"
+    "city": "Tallinn",
+    "employeeCount": "495"
   },
   {
     "companyName": "0dav riie OÜ",
     "registryCode": 14288602,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Vanaaseme",
-    "city": "Kehtna vald"
+    "city": "Kehtna vald",
+    "employeeCount": "22"
   },
   {
     "companyName": "0 rent OÜ",
     "registryCode": 14289174,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Väike tn 14a-12",
-    "city": "Põhja-Sakala vald"
+    "city": "Põhja-Sakala vald",
+    "employeeCount": "96"
   },
   {
     "companyName": "0x00 OÜ",
     "registryCode": 14809610,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Tammepõllu tee 13-12",
-    "city": "Viimsi vald"
+    "city": "Viimsi vald",
+    "employeeCount": "55"
   },
   {
     "companyName": "1000000INVEST OÜ",
     "registryCode": 14433211,
     "companyStatus": "Registrisse kantud",
     "companyAddress": "Sõpruse pst 145",
-    "city": "Tallinn"
+    "city": "Tallinn",
+    "employeeCount": "33"
   }
 ]
