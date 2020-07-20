@@ -11,24 +11,39 @@
       <div class="row-marketdata" display="table">
         <div class="column-marketdata">
             <dt class="font-weight-light">REGISTRATION CODE</dt>
-            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.registryCode}</dt>
+            <div style="margin: 0 30px 30px 0">
+                <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.registryCode">
+                <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.registryCode">
+            </div>
             <dt class="font-weight-light">EMPLOYEE COUNT</dt>
-            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.employeeCount}</dt>
+            <div style="margin: 0 30px 30px 0">
+                <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.employeeCount">
+                <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.employeeCount">
+            </div>
         </div>
         <div class="column-marketdata">
             <dt class="font-weight-light">ADDRESS</dt>
-            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.companyAddress}</dt>
+            <div style="margin: 0 30px 30px 0">
+                <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.companyAddress">
+                <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.companyAddress">
+            </div>
             <dt class="font-weight-light">STATUS</dt>
-            <dt class="font-weight-normal" style="margin: 0 0 30px 0">${company.companyStatus}</dt>
+            <div style="margin: 0 30px 30px 0">
+                <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.companyStatus">
+                <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.companyStatus">
+            </div>
         </div>
         <div class="column-marketdata">
             <dt class="font-weight-light">SECTOR</dt>
-            <dt class="font-weight-normal" style="margin: 0 0 30px 0">-</dt>
+            <div style="margin: 0 30px 30px 0">
+                <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.companySector">
+                <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.companySector">
+            </div>
         </div>
       </div>
       <div>
-        <button class="btn btn-primary" style="margin: 1% 1% 1% 0%"><i class="fa fa-pencil"></i></button>
-        <button class="btn btn-secondary" style="margin: 0 0 0 0"><i class="fa fa-trash"></i></button>
+        <button type="button" class="btn btn-dark float-left mr-3" click.delegate="openEdit()">${value}</button>
+        <button class="btn btn-dark float-left mr-2"><i class="fa fa-trash"></i></button>
       </div>
     </div>
   </span>

@@ -11,11 +11,30 @@ export class DetailedView {
     this.httpClient = httpClient;
     this.marketdataService = marketdataService;
     this.router = router;
+    this.canEdit = false;
+    this.value = 'Edit';
   }
 
   activate(params) {
     console.log(params.id);
     this.company = params.id;
+  }
+
+  openEdit(company) {
+    console.log(company);
+    if (this.value === 'Edit') {
+      this.value = 'Close editing';
+      this.showSaveAndClose = true;
+      this.canEdit = true;
+    } else  {
+      this.resetState();
+    }
+  }
+
+  resetState() {
+    this.value = 'Edit';
+    this.canEdit = false;
+    this.showSaveAndClose = false;
   }
 
   bind() {
