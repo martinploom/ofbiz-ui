@@ -26,6 +26,6 @@ export class Listview {
   }
 
   onSelectCompany(onClick, company) {
-    this.router.navigateToRoute('Detailed-view', {id: company.companyName});
+    this.router.navigateToRoute('detailed-view', {id: company.companyName});
   }
 }

@@ -1,14 +1,17 @@
 import { inject } from 'aurelia-dependency-injection';
 import { Store } from 'aurelia-store';
+import { autoinject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import {HttpClient} from 'aurelia-fetch-client';
 
+@autoinject
 @inject(Store, Router)
 export class vaadinListview {
+  baseUrl = 'api/generic/v1/entities/MarketdataModel';
   constructor(router) {
     this.router = router;
-    this.faBars = faBars;
+    this.faEllipsisV = faEllipsisV;
   }
 
   attached() {
@@ -54,5 +57,9 @@ export class vaadinListview {
 
   get tasksSelected() {
     return !!this.grid && this.grid.selectedItems.length > 0;
+  }
+
+  handleSelectCompany(companyName) {
+    this.router.navigateToRoute('detailed-view', {id: companyName});
   }
 }
