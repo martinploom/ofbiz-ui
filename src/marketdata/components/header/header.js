@@ -23,7 +23,7 @@ export class Header {
   }
 
   async attached() {
-    this.data = await this.marketdataService.getMarketdataCompanies();
+    this.data = await this.marketdataService.getAllCompanies();
   }
 
   submitData() {
