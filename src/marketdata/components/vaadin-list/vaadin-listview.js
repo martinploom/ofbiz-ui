@@ -25,6 +25,27 @@ export class vaadinListview {
   }
 
   initGridColumns() {
+    customElements.whenDefined('vaadin-grid').then(function() {
+      const grid = document.querySelector('vaadin-grid');
+      const companyName = document.querySelector('#companyName');
+      const registryCode = document.querySelector('#registryCode');
+      const companyStatus = document.querySelector('#companyStatus');
+      const companyAddress = document.querySelector('#companyAddress');
+      const city = document.querySelector('#city');
+
+      const addBtn = document.querySelector('#add-btn');
+
+      addBtn.addEventListener('click', function() {
+        if (companyName.value && registryCode.value) {
+          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, companyStatus: companyStatus.value, companyAddress: companyAddress.value, city: city.value});
+          grid.clearCache();
+          companyName.value = registryCode.value = '';
+        } else {
+          alert('All fields required!');
+        }
+      });
+    });
+
     const columns = document.querySelectorAll('vaadin-grid-column');
     columns[0].renderer = (root, column, rowData) => {
       const companyName = rowData.item.companyName;

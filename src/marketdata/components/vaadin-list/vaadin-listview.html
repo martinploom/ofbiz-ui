@@ -1,21 +1,59 @@
-
 <template>
-  <div class="card-body">
-    <vaadin-context-menu style="text-align: end;">
-      <vaadin-button theme="icon" aria-label="Hide column menu">
-        <font-awesome-icon icon.bind="faEllipsisV"></font-awesome-icon>
-      </vaadin-button>
-    </vaadin-context-menu>
-    <div class="card-body">
-    <vaadin-grid theme="compact row-stripes" column-reordering-allowed height-by-rows>
-      <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
-      <vaadin-grid-column path="companyName" header="Company Name" name="companyName"></vaadin-grid-column>
-      <vaadin-grid-column path="registryCode" header="Company Code" name="registryCode"></vaadin-grid-column>
-      <vaadin-grid-column path="companyStatus" header="Status" name="companyStatus"></vaadin-grid-column>
-      <vaadin-grid-column path="companyAddress" header="Address" name="companyAddress"></vaadin-grid-column>
-      <vaadin-grid-column path="city" header="City" name="city"></vaadin-grid-column>
-    </vaadin-grid>
+  <div class="container col-12 row">
+    <div class="col-11">
+      <div class="card-body">
+        <vaadin-grid theme="compact row-stripes" column-reordering-allowed height-by-rows>
+          <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+          <vaadin-grid-column path="companyName" header="Company Name" name="companyName"></vaadin-grid-column>
+          <vaadin-grid-column path="registryCode" header="Company Code" name="registryCode"></vaadin-grid-column>
+          <vaadin-grid-column path="companyStatus" header="Status" name="companyStatus"></vaadin-grid-column>
+          <vaadin-grid-column path="companyAddress" header="Address" name="companyAddress"></vaadin-grid-column>
+          <vaadin-grid-column path="city" header="City" name="city"></vaadin-grid-column>
+        </vaadin-grid>
+      </div>
+    </div>
+    <div class="col-13 row mt-3">
+      <vaadin-context-menu style="text-align: end;">
+        <vaadin-button theme="icon" aria-label="Hide column menu">
+          <font-awesome-icon icon.bind="faEllipsisV"></font-awesome-icon>
+        </vaadin-button>
+      </vaadin-context-menu>
     </div>
   </div>
+
+  <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ADD CONTACT</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <dt class="font-weight-light">COMPANY NAME</dt>
+            <vaadin-text-field id="companyName" header="Company Name" style="width: 100%"></vaadin-text-field>
+          </div>
+          <div class="form-group">
+            <dt class="font-weight-light">REGISTRATION CODE</dt>
+            <vaadin-text-field id="registryCode" header="Company Code" style="width: 100%"></vaadin-text-field>
+          </div>
+          <div class="form-group">
+            <dt class="font-weight-light">COMPANY STATUS</dt>
+            <vaadin-text-field id="companyStatus" header="Company Status" style="width: 100%"></vaadin-text-field>
+          </div>
+          <div class="form-group">
+            <dt class="font-weight-light">ADDRESS</dt>
+            <vaadin-text-field id="companyAddress" header="Company Address" style="width: 100%"></vaadin-text-field>
+          </div>
+          <div class="form-group">
+            <dt class="font-weight-light">CITY</dt>
+            <vaadin-text-field id="city" header="City" style="width: 100%"></vaadin-text-field>
+          </div>
+          <vaadin-button id="add-btn">Add</vaadin-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

@@ -20,30 +20,27 @@
                 <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.employeeCount">
                 <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.employeeCount">
             </div>
-        </div>
-        <div class="column-marketdata">
             <dt class="font-weight-light">ADDRESS</dt>
             <div style="margin: 0 30px 30px 0">
                 <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.companyAddress">
                 <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.companyAddress">
             </div>
+        </div>
             <dt class="font-weight-light">STATUS</dt>
             <div style="margin: 0 30px 30px 0">
                 <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.companyStatus">
                 <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.companyStatus">
             </div>
-        </div>
-        <div class="column-marketdata">
             <dt class="font-weight-light">SECTOR</dt>
             <div style="margin: 0 30px 30px 0">
                 <input disabled if.bind="!canEdit" type="text"  class="form-control" value.bind="company.companySector">
                 <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.companySector">
             </div>
         </div>
-      </div>
-      <div>
+            <div>
         <button type="button" class="btn btn-dark float-left mr-3" click.delegate="openEdit()">${value}</button>
         <button class="btn btn-dark float-left mr-2"><i class="fa fa-trash"></i></button>
+      </div>
       </div>
     </div>
   </span>

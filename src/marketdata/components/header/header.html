@@ -8,7 +8,8 @@
       New company
     </button>
     <div class="form-inline col-6">
-      <input type="text" value.bind="filters[0].value" placeholder="Search..." class="form-control" style="width:100%"/>
+      <input class="form-control" type="search" placeholder="Search..." aria-label="Search"
+             style="width:100%" value.bind="searchInput" change.delegate="search()">
     </div>
     <!-- TODO: Add js from resource-list.js -->
     <div class="dropdown">
@@ -45,7 +46,7 @@
     </button>
   </nav>
 
-  <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-hidden="true">
+<!--  <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -81,7 +82,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 

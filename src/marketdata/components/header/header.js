@@ -2,8 +2,9 @@ import {inject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {MarketdataService} from '../../service/marketdata-service.js';
 import {HttpClient} from 'aurelia-fetch-client';
+import {vaadinListview} from '../vaadin-list/vaadin-listview';
 
-@inject(EventAggregator, MarketdataService)
+@inject(EventAggregator, MarketdataService, vaadinListview)
 export class Header {
   baseUrl = 'api/generic/v1/entities/MarketdataModel';
   companies = [];
