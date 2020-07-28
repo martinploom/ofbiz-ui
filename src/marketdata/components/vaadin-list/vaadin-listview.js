@@ -65,8 +65,9 @@ export class vaadinListview {
     const columns = document.querySelectorAll('vaadin-grid-column');
     columns[0].renderer = (root, column, rowData) => {
       const companyName = rowData.item.groupName;
+      const registryCode = rowData.item.partyId;
       root.innerHTML = `<a href="javascript:void(0);">${companyName}<a/>`;
-      root.addEventListener('click', () => this.handleSelectCompany(companyName));
+      root.addEventListener('click', () => this.handleSelectCompany(registryCode));
     };
 
     const contextMenu = document.querySelector('vaadin-context-menu');
@@ -95,7 +96,7 @@ export class vaadinListview {
   //   return !!this.grid && this.grid.selectedItems.length > 0;
   // }
 
-  handleSelectCompany(companyName) {
-    this.router.navigateToRoute('detailed-view', { id: companyName });
+  handleSelectCompany(registryCode) {
+    this.router.navigateToRoute('detailed-view', { id: registryCode });
   }
 }

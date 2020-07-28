@@ -5,19 +5,20 @@ import {Router} from 'aurelia-router';
 
 @inject(HttpClient, MarketdataService, Router)
 export class DetailedView {
-  baseUrl = 'api/generic/v1/entities/MarketdataModel';
+  // baseUrl = 'api/generic/v1/entities/MarketdataModel';
 
   constructor(httpClient, marketdataService, router) {
-    this.httpClient = httpClient;
+    // this.httpClient = httpClient;
     this.marketdataService = marketdataService;
     this.router = router;
     this.canEdit = false;
     this.value = 'Edit';
   }
 
-  activate(params) {
-    console.log(params.id);
+  async activate(params) {
+    // console.log(params.id);
     this.company = params.id;
+
   }
 
   openEdit(company) {
@@ -38,6 +39,10 @@ export class DetailedView {
   }
 
   bind() {
+    let company = await this.marketdataService.getCompany()
+
+
+
     let client = new HttpClient();
 
     return client.fetch('data.json')
