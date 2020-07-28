@@ -34,24 +34,44 @@ export class MarketdataService {
           body: body
         }
       );
-      console.log("HEllo!");
       return await response.json();
     } catch (e) {
       return null;
     }
-    // return this.httpClient
-    //   .fetch(`${this.baseUrl}/services/performFind`, {
-    //     method: 'post',
-    //     body: body
-    //   })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.error(res);
-    //   })
-    //   .catch((error) => {
-    //     /* eslint no-console: ["error", { allow: ["error"] }] */
-    //     console.error(error);
-    //   }); // TODO: improve error handling
+  }
+
+  async getCompany(registryCode) {
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/entities/PartyGroup?partyId=${registryCode}`
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async getCompanyTimeperiodInfo(registryCode) {
+    const body = JSON.stringify({
+      inputFields: {
+        partyId_fld0_op: 'like',
+        partyId_fld0_value: registryCode
+      },
+      entityName: 'PartyQuarter'
+    });
+
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/services/performFind`,
+        {
+          method: 'POST',
+          body: body
+        }
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
   }
 
   getProjectList() {
