@@ -1,37 +1,53 @@
 import { inject } from 'aurelia-dependency-injection';
 import { autoinject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+// import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import {HttpClient} from 'aurelia-fetch-client';
+import { MarketdataService } from '../../service/marketdata-service';
 
 @autoinject
-@inject(Router)
+@inject(Router, MarketdataService)
 export class vaadinListview {
-  baseUrl = 'api/generic/v1/entities/MarketdataModel';
-  constructor(router) {
+  // baseUrl = 'api/generic/v1/entities/MarketdataModel';
+  constructor(router, marketdataService) {
     this.router = router;
-    this.faEllipsisV = faEllipsisV;
+    this.marketdataService = marketdataService;
+    // this.faEllipsisV = faEllipsisV;
   }
 
-  attached() {
+  async attached() {
     const grid = document.querySelector('vaadin-grid');
     this.initGridColumns();
-    let client = new HttpClient();
+    // let client = new HttpClient();
 
-    return client.fetch('data.json')
-      .then(response => response.json())
-      .then(companies => this.companies = companies)
-      .then((response) => (grid.items = response));
+    // return client.fetch('data.json')
+    //   .then(response => response.json())
+    //   .then(companies => this.companies = companies)
+    //   .then((response) => (grid.items = response));
+
+    const companies = await this.marketdataService.getAllCompanies();
+    // console.log('Hi!');
+    console.log(companies);
+    this.companies = companies.listIt.completeList;
+    grid.items = this.companies;
+
+
+    // return await this.marketdataService.getAllCompanies()
+    //   .then(console.log(response => response))
+    //   .then(console.log(response => response))
+    //   .then(console.log("Hello!")
+      // .then(response => this.companies = companies)
+      // .then((response) => (grid.items = response));
   }
 
   initGridColumns() {
     customElements.whenDefined('vaadin-grid').then(function() {
       const grid = document.querySelector('vaadin-grid');
-      const companyName = document.querySelector('#companyName');
-      const registryCode = document.querySelector('#registryCode');
-      const companyStatus = document.querySelector('#companyStatus');
-      const companyAddress = document.querySelector('#companyAddress');
-      const city = document.querySelector('#city');
+      const companyName = document.querySelector('#groupName');
+      const registryCode = document.querySelector('#partyId');
+      const companyStatus = document.querySelector('#officeSiteName');
+      const companyAddress = document.querySelector('#officeSiteName');
+      const city = document.querySelector('#officeSiteName');
 
       const addBtn = document.querySelector('#add-btn');
 
@@ -48,7 +64,7 @@ export class vaadinListview {
 
     const columns = document.querySelectorAll('vaadin-grid-column');
     columns[0].renderer = (root, column, rowData) => {
-      const companyName = rowData.item.companyName;
+      const companyName = rowData.item.groupName;
       root.innerHTML = `<a href="javascript:void(0);">${companyName}<a/>`;
       root.addEventListener('click', () => this.handleSelectCompany(companyName));
     };
@@ -75,9 +91,9 @@ export class vaadinListview {
     };
   }
 
-  get tasksSelected() {
-    return !!this.grid && this.grid.selectedItems.length > 0;
-  }
+  // get tasksSelected() {
+  //   return !!this.grid && this.grid.selectedItems.length > 0;
+  // }
 
   handleSelectCompany(companyName) {
     this.router.navigateToRoute('detailed-view', { id: companyName });

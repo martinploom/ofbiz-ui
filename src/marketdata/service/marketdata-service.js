@@ -1,19 +1,21 @@
 import {inject} from 'aurelia-dependency-injection';
 import {HttpClient, json} from 'aurelia-fetch-client';
-import {safeGet} from "../../commons/util/utility";
+
+// import {safeGet} from "../../commons/util/utility";
 
 @inject(HttpClient)
 export class MarketdataService {
   // baseUrl = 'https://localhost:8443/api/marketdata';
   //baseUrl = 'api/generic/v1';
-  baseUrl = 'https://165.22.28.65:8443/api/generic/v1';
+  // baseUrl = 'https://165.22.28.65:8443/api/generic/v1';
+  baseUrl = 'http://localhost/api/generic/v1';
 
   constructor(httpClient) {
     this.httpClient = httpClient;
   }
 
-  getAllCompanies() {
-    const body = {
+  async getAllCompanies() {
+    const body = JSON.stringify({
       inputFields: {
         partyId_fld0_op: 'greaterThanEqualTo',
         partyId_fld0_value: 10000000,
@@ -22,21 +24,33 @@ export class MarketdataService {
         partyId_fld1_value: 99999999
       },
       entityName: 'PartyGroup'
-    };
-
-    return this.httpClient
-      .fetch(`${this.baseUrl}/services/performFind`, {
-        method: 'post',
-        body: body
-      })
-      .then((res) => res.json())
-      .then((res) => {
-        console.error(res);
-      })
-      .catch((error) => {
-        /* eslint no-console: ["error", { allow: ["error"] }] */
-        console.error(error);
-      }); // TODO: improve error handling
+    });
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/services/performFind`,
+        {
+          method: 'POST',
+          body: body
+        }
+      );
+      console.log("HEllo!");
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+    // return this.httpClient
+    //   .fetch(`${this.baseUrl}/services/performFind`, {
+    //     method: 'post',
+    //     body: body
+    //   })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     console.error(res);
+    //   })
+    //   .catch((error) => {
+    //     /* eslint no-console: ["error", { allow: ["error"] }] */
+    //     console.error(error);
+    //   }); // TODO: improve error handling
   }
 
   getProjectList() {
