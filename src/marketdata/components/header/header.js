@@ -6,7 +6,7 @@ import {vaadinListview} from '../vaadin-list/vaadin-listview';
 
 @inject(EventAggregator, MarketdataService, vaadinListview)
 export class Header {
-  baseUrl = 'api/generic/v1/entities/MarketdataModel';
+  // baseUrl = 'api/generic/v1/entities/MarketdataModel';
   companies = [];
   test = null;
 
@@ -17,14 +17,14 @@ export class Header {
 
   bind() {
     let client = new HttpClient();
-
+    //
     return client.fetch('data.json')
       .then(response => response.json())
       .then(companies => this.companies = companies);
   }
 
   async attached() {
-    this.data = await this.marketdataService.getMarketdataCompanies();
+    // this.data = await this.marketdataService.getMarketdataCompanies();
   }
 
   submitData() {

@@ -5,10 +5,6 @@ import {HttpClient, json} from 'aurelia-fetch-client';
 
 @inject(HttpClient)
 export class MarketdataService {
-  // baseUrl = 'https://localhost:8443/api/marketdata';
-  //baseUrl = 'api/generic/v1';
-  // baseUrl = 'https://165.22.28.65:8443/api/generic/v1';
-  // baseUrl = 'http://localhost/api/generic/v1';
   baseUrl = 'api/generic/v1'
 
   constructor(httpClient) {
