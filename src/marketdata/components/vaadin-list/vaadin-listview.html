@@ -6,10 +6,12 @@
           <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
           <vaadin-grid-column path="companyName" header="Company Name" name="companyName"></vaadin-grid-column>
           <vaadin-grid-column path="partyId" header="Company Code" name="partyId"></vaadin-grid-column>
-          <vaadin-grid-column path="officeSiteName" header="Address" name="officeSiteName"></vaadin-grid-column>
+          <vaadin-grid-column path="numEmployees" header="Number of Employees" name="numEmployees"></vaadin-grid-column>
+          <vaadin-grid-column path="officeSiteName" header="City" name="officeSiteName"></vaadin-grid-column>
         </vaadin-grid>
       </div>
     </div>
+    <div id="pages"></div>
     <div class="col-13 row mt-3">
       <vaadin-context-menu style="text-align: end;">
         <vaadin-button theme="icon" aria-label="Hide column menu">
@@ -35,19 +37,11 @@
           </div>
           <div class="form-group">
             <dt class="font-weight-light">REGISTRATION CODE</dt>
-            <vaadin-text-field id="registryCode" header="Company Code" style="width: 100%"></vaadin-text-field>
+            <vaadin-text-field id="partyId" header="Company Code" style="width: 100%"></vaadin-text-field>
           </div>
           <div class="form-group">
-            <dt class="font-weight-light">COMPANY STATUS</dt>
-            <vaadin-text-field id="companyStatus" header="Company Status" style="width: 100%"></vaadin-text-field>
-          </div>
-          <div class="form-group">
-            <dt class="font-weight-light">ADDRESS</dt>
-            <vaadin-text-field id="companyAddress" header="Company Address" style="width: 100%"></vaadin-text-field>
-          </div>
-          <div class="form-group">
-            <dt class="font-weight-light">CITY</dt>
-            <vaadin-text-field id="city" header="City" style="width: 100%"></vaadin-text-field>
+            <dt class="font-weight-light">City</dt>
+            <vaadin-text-field id="officeSiteName" header="Company Address" style="width: 100%"></vaadin-text-field>
           </div>
           <vaadin-button id="add-btn">Add</vaadin-button>
         </div>

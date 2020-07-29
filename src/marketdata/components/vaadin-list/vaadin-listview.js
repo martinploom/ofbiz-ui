@@ -45,15 +45,15 @@ export class vaadinListview {
       const grid = document.querySelector('vaadin-grid');
       const companyName = document.querySelector('#groupName');
       const registryCode = document.querySelector('#partyId');
-      const companyStatus = document.querySelector('#officeSiteName');
+      const numberOfEmployees = document.querySelector('#numEmployees');
       const companyAddress = document.querySelector('#officeSiteName');
-      const city = document.querySelector('#officeSiteName');
+      //const city = document.querySelector('#officeSiteName');
 
       const addBtn = document.querySelector('#add-btn');
 
       addBtn.addEventListener('click', function() {
         if (companyName.value && registryCode.value) {
-          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, companyStatus: companyStatus.value, companyAddress: companyAddress.value, city: city.value});
+          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, companyAddress: companyAddress.value, numberOfEmployees: numberOfEmployees.value});
           grid.clearCache();
           companyName.value = registryCode.value = '';
         } else {
