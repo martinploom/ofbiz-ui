@@ -1,7 +1,7 @@
 import { inject } from 'aurelia-dependency-injection';
 import { autoinject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
-// import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import {HttpClient} from 'aurelia-fetch-client';
 import { MarketdataService } from '../../service/marketdata-service';
 
@@ -12,7 +12,7 @@ export class vaadinListview {
   constructor(router, marketdataService) {
     this.router = router;
     this.marketdataService = marketdataService;
-    // this.faEllipsisV = faEllipsisV;
+    this.faEllipsisV = faEllipsisV;
   }
 
   async attached() {
