@@ -70,39 +70,12 @@ export class MarketdataService {
     }
   }
 
-  getProjectList() {
-    return this.httpClient
-      .fetch(this.baseUrl)
-      .then(res => res.json())
-      .then(res => res.projectList)
-      .catch(error => {
-        /* eslint no-console: ["error", { allow: ["error"] }] */
-        console.error(error);
-      }); // TODO: improve error handling
-  }
-
-  createProject(project) {
-    const body = json(project);
-    return this.httpClient
-      .fetch(`${this.baseUrl}/new-project`, {
-        method: 'post',
-        body: body
-      })
-      .catch(error => {
-        /* eslint no-console: ["error", { allow: ["error"] }] */
-        console.error(error);
-      }); // TODO: improve error handling
-  }
-
-  async getMarketdataCompanies() {
+  async deleteCompany(registryCode) {
     try {
       const response = await this.httpClient.fetch(
-        `${this.baseUrl}/services/getMarketdataCompanies`,
+        `${this.baseUrl}/entities/PartyGroup?partyId=${registryCode}`,
         {
-          method: 'POST',
-          body: JSON.stringify(
-            {'': ''}
-          )
+          method: 'DELETE'
         }
       );
       return await response.json();
@@ -110,4 +83,45 @@ export class MarketdataService {
       return null;
     }
   }
+
+  // getProjectList() {
+  //   return this.httpClient
+  //     .fetch(this.baseUrl)
+  //     .then(res => res.json())
+  //     .then(res => res.projectList)
+  //     .catch(error => {
+  //       /* eslint no-console: ["error", { allow: ["error"] }] */
+  //       console.error(error);
+  //     }); // TODO: improve error handling
+  // }
+
+  // createProject(project) {
+  //   const body = json(project);
+  //   return this.httpClient
+  //     .fetch(`${this.baseUrl}/new-project`, {
+  //       method: 'post',
+  //       body: body
+  //     })
+  //     .catch(error => {
+  //       /* eslint no-console: ["error", { allow: ["error"] }] */
+  //       console.error(error);
+  //     }); // TODO: improve error handling
+  // }
+
+  // async getMarketdataCompanies() {
+  //   try {
+  //     const response = await this.httpClient.fetch(
+  //       `${this.baseUrl}/services/getMarketdataCompanies`,
+  //       {
+  //         method: 'POST',
+  //         body: JSON.stringify(
+  //           {'': ''}
+  //         )
+  //       }
+  //     );
+  //     return await response.json();
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 }
