@@ -6,13 +6,13 @@
           <div class="row">
             <div class="col h-25 w-75">
               <a style="cursor: pointer" click.delegate="onSelectCompany($event, company)">
-                <h5>${company.companyName}</h5>
+                <h5>${company.groupName}</h5>
               </a>
             </div>
           </div>
-          <p class="card-text">Company code: ${company.registryCode}</p>
-          <p class="card-text">Status: ${company.companyStatus}</p>
-          <p class="card-text">Address: ${company.companyAddress}, ${company.city}</p>
+          <p class="card-text">Company code: ${company.partyId}</p>
+          <p class="card-text">Status: </p>
+          <p class="card-text">Region: ${company.officeSiteName}</p>
         </div>
       </div>
     </div>

@@ -7,11 +7,10 @@ import { MarketdataService } from '../../service/marketdata-service';
 @autoinject
 @inject(Router, MarketdataService)
 export class vaadinListview {
-  // baseUrl = 'api/generic/v1/entities/MarketdataModel';
   constructor(router, marketdataService) {
     this.router = router;
     this.marketdataService = marketdataService;
-    this.faEllipsisV = faEllipsisV;
+    // this.faEllipsisV = faEllipsisV;
   }
 
   async attached() {
@@ -25,8 +24,6 @@ export class vaadinListview {
     //   .then((response) => (grid.items = response));
 
     const companies = await this.marketdataService.getAllCompanies();
-    // console.log('Hi!');
-    console.log(companies);
     this.companies = companies.listIt.completeList;
     grid.items = this.companies;
 
