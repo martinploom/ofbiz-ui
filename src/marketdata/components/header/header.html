@@ -1,5 +1,6 @@
 <template>
   <require from="../../../commons/workspaces-menu/workspace-favourite"></require>
+  <require from="../query-builder/query-builder"></require>
   <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between col-12">
     <span class="navbar-brand mb-0 h1">Companies</span>
     <workspace-favourite class="float-left mx-2"></workspace-favourite>
@@ -12,39 +13,67 @@
              style="width:100%" value.bind="searchInput" change.delegate="search()">
     </div>
     <!-- TODO: Add js from resource-list.js -->
-    <div class="dropdown">
-      <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-filter"></i>
-        Filter
-      </button>
-      <div class="dropdown-menu" style="width: 300px;">
-        <form class="px-4 py-3">
-          <div class="form-group">
-            <label for="filtername">Company name</label>
-            <input type="text" class="form-control" id="filtername">
-          </div>
-          <div class="form-group">
-            <label for="filtercode">Company code</label>
-            <input type="text" class="form-control" id="filtercode">
-          </div>
-          <div class="form-group">
-            <label class="mr-sm-2" for="filterstatus">Status</label>
-            <select class="custom-select mr-sm-2" id="filterstatus">
-              <option selected value="inRegistry">Registrisse kantud</option>
-              <option value="notInRegistry">Pole registris</option>
-              <option value="unknown">Teadmata</option>
-            </select>
-          </div>
-          <div class="form-group">
-          </div>
-          <button class="btn btn-primary" click.delegate="filterResource()">Filter</button>
-        </form>
-      </div>
-    </div>
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" href="#filterModal">
+      Filter
+    </button>
+<!--    <div class="dropdown">-->
+<!--      <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown">-->
+<!--        <i class="fa fa-filter"></i>-->
+<!--        Filter-->
+<!--      </button>-->
+<!--      <div class="dropdown-menu" style="width: 300px;">-->
+<!--        <form class="px-4 py-3">-->
+<!--          <div class="form-group">-->
+<!--            <label for="filtername">Company name</label>-->
+<!--            <input type="text" class="form-control" id="filtername">-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="filtercode">Company code</label>-->
+<!--            <input type="text" class="form-control" id="filtercode">-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label class="mr-sm-2" for="filterstatus">Status</label>-->
+<!--            <select class="custom-select mr-sm-2" id="filterstatus">-->
+<!--              <option selected value="inRegistry">Registrisse kantud</option>-->
+<!--              <option value="notInRegistry">Pole registris</option>-->
+<!--              <option value="unknown">Teadmata</option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--          </div>-->
+<!--          <button class="btn btn-primary" click.delegate="filterResource()">Filter</button>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
     <button type="button" class="btn btn-outline-dark">
       Import contacts
     </button>
   </nav>
+  <div class="modal fade" id="filterModal" tabindex="1" role="dialog" aria-labelledby="filterModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="width: unset">
+        <div class="modal-header">
+          <h5 class="modal-title" id="filterModalLabel">Filter</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="nav-add-subscriber">
+            <div style="display: flex; justify-content: center" class="query-builder-div">
+              <query-builder></query-builder>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" click.delegate="applyFilter()"
+                      data-dismiss="modal">Filter</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!--  <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
