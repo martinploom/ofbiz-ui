@@ -21,7 +21,6 @@ export class DetailedView {
 
     let timeperiodInfo = await this.marketdataService.getCompanyTimeperiodInfo(this.registryCode);
     this.companyTimeperiodInfo = timeperiodInfo.listIt.completeList;
-    // console.log(this.companyTimeperiodInfo);
   }
 
   openEdit(company) {
@@ -35,14 +34,14 @@ export class DetailedView {
     }
   }
 
-  async deleteCompany() {
-    await this.marketdataService.deleteCompany(this.registryCode);
-    this.router.navigateToRoute('marketdata');
-  }
-
   resetState() {
     this.value = 'Edit';
     this.canEdit = false;
     this.showSaveAndClose = false;
+  }
+
+  async deleteCompany() {
+    await this.marketdataService.deleteCompany(this.registryCode);
+    this.router.navigateToRoute('marketdata');
   }
 }
