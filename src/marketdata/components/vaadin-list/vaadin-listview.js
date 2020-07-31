@@ -10,30 +10,15 @@ export class vaadinListview {
   constructor(router, marketdataService) {
     this.router = router;
     this.marketdataService = marketdataService;
-    // this.faEllipsisV = faEllipsisV;
+    this.faEllipsisV = faEllipsisV;
   }
 
   async attached() {
     const grid = document.querySelector('vaadin-grid');
     this.initGridColumns();
-    // let client = new HttpClient();
-
-    // return client.fetch('data.json')
-    //   .then(response => response.json())
-    //   .then(companies => this.companies = companies)
-    //   .then((response) => (grid.items = response));
-
     const companies = await this.marketdataService.getAllCompanies();
     this.companies = companies.listIt.completeList;
     grid.items = this.companies;
-
-
-    // return await this.marketdataService.getAllCompanies()
-    //   .then(console.log(response => response))
-    //   .then(console.log(response => response))
-    //   .then(console.log("Hello!")
-      // .then(response => this.companies = companies)
-      // .then((response) => (grid.items = response));
   }
 
   initGridColumns() {
