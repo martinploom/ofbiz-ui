@@ -1,7 +1,7 @@
 <template>
   <div class="row mt-4">
     <div class="col-4" repeat.for="company of companies">
-      <div class="card" style="height: 12rem; margin-bottom: 20px;">
+      <div class="card" style="height: 13rem; margin-bottom: 20px;">
         <div class="card-body">
           <div class="row">
             <div class="col h-25 w-75">
@@ -11,8 +11,8 @@
             </div>
           </div>
           <p class="card-text">Company code: ${company.partyId}</p>
-          <p class="card-text">Region: ${company.numEmployees}</p>
-          <p class="card-text">Region: ${company.annualRevenue}</p>
+          <p class="card-text">Number of Employees: ${company.numEmployees}</p>
+          <p class="card-text">Revenue: ${company.annualRevenue}</p>
           <p class="card-text">Region: ${company.officeSiteName}</p>
         </div>
       </div>
