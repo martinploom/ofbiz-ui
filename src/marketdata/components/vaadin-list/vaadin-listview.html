@@ -4,9 +4,11 @@
       <div class="card-body">
         <vaadin-grid theme="compact row-stripes" column-reordering-allowed height-by-rows>
           <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+          <vaadin-grid-column path="logoImageUrl" header="Company Logo" name="logoImageUrl"></vaadin-grid-column>
           <vaadin-grid-column path="companyName" header="Company Name" name="companyName"></vaadin-grid-column>
           <vaadin-grid-column path="partyId" header="Company Code" name="partyId"></vaadin-grid-column>
           <vaadin-grid-column path="numEmployees" header="Number of Employees" name="numEmployees"></vaadin-grid-column>
+          <vaadin-grid-column path="annualRevenue" header="Annual Revenue" name="annualRevenue"></vaadin-grid-column>
           <vaadin-grid-column path="officeSiteName" header="Region" name="officeSiteName"></vaadin-grid-column>
         </vaadin-grid>
       </div>
