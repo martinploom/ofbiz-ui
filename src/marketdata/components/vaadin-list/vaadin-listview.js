@@ -27,6 +27,7 @@ export class vaadinListview {
       const companyName = document.querySelector('#groupName');
       const registryCode = document.querySelector('#partyId');
       const numberOfEmployees = document.querySelector('#numEmployees');
+      const annualRevenue = document.querySelector('#annualRevenue');
       const companyAddress = document.querySelector('#officeSiteName');
       //const city = document.querySelector('#officeSiteName');
 
@@ -34,7 +35,7 @@ export class vaadinListview {
 
       addBtn.addEventListener('click', function() {
         if (companyName.value && registryCode.value) {
-          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, companyAddress: companyAddress.value, numberOfEmployees: numberOfEmployees.value});
+          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, numberOfEmployees: numberOfEmployees.value, companyAddress: companyAddress.value, annualRevenue: annualRevenue.value});
           grid.clearCache();
           companyName.value = registryCode.value = '';
         } else {
