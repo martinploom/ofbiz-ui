@@ -35,7 +35,7 @@ export class vaadinListview {
 
       addBtn.addEventListener('click', function() {
         if (companyName.value && registryCode.value) {
-          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, numberOfEmployees: numberOfEmployees.value, companyAddress: companyAddress.value, annualRevenue: annualRevenue.value});
+          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, numberOfEmployees: numberOfEmployees.value, annualRevenue: annualRevenue.value, companyAddress: companyAddress.value});
           grid.clearCache();
           companyName.value = registryCode.value = '';
         } else {
