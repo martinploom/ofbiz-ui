@@ -9,6 +9,7 @@ export class DetailedView {
     this.router = router;
     this.canEdit = false;
     this.value = 'Edit';
+    this.close = 'Delete';
   }
 
   activate(params) {
@@ -26,7 +27,8 @@ export class DetailedView {
   openEdit(company) {
     console.log(company);
     if (this.value === 'Edit') {
-      this.value = 'Close editing';
+      this.value = 'Save and close';
+      this.close = 'Close';
       this.showSaveAndClose = true;
       this.canEdit = true;
     } else  {
@@ -36,12 +38,17 @@ export class DetailedView {
 
   resetState() {
     this.value = 'Edit';
+    this.close = 'Delete';
     this.canEdit = false;
     this.showSaveAndClose = false;
   }
 
   async deleteCompany() {
-    await this.marketdataService.deleteCompany(this.registryCode);
-    this.router.navigateToRoute('marketdata');
+    if (this.close === 'Delete') {
+      await this.marketdataService.deleteCompany(this.registryCode);
+      this.router.navigateToRoute('marketdata');
+    } else {
+      this.resetState();
+    }
   }
 }
