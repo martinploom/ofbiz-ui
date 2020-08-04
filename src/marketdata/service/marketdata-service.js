@@ -84,6 +84,39 @@ export class MarketdataService {
     }
   }
 
+  async addCompany(body) {
+    await this.createCompany(body);
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/entities/PartyGroup`,
+        {
+          method: 'POST',
+          body: JSON.stringify(body)
+        }
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async createCompany(body) {
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/entities/Party`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            partyId: body.partyId
+          })
+        }
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
   // getProjectList() {
   //   return this.httpClient
   //     .fetch(this.baseUrl)

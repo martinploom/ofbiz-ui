@@ -33,11 +33,24 @@ export class vaadinListview {
 
       const addBtn = document.querySelector('#add-btn');
 
-      addBtn.addEventListener('click', function() {
+      addBtn.addEventListener('click', async function() {
         if (companyName.value && registryCode.value) {
-          grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, numberOfEmployees: numberOfEmployees.value, annualRevenue: annualRevenue.value, companyAddress: companyAddress.value});
+          // let demodata = grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, numberOfEmployees: numberOfEmployees.value, companyAddress: companyAddress.value, annualRevenue: annualRevenue.value});
+          // console.log(registryCode.value);
+          const body = JSON.stringify({
+            partyId: registryCode.value,
+            groupName: companyName.value,
+            officeSiteName: companyAddress.value,
+            annualRevenue: annualRevenue.value,
+            numEmployees: numberOfEmployees.value,
+            logoImageUrl: ''
+          });
+          console.log(body);
+          this.addCompany(body);
+          // const companies = await this.marketdataService.getAllCompanies();
+          // await this.marketdataService.addCompany(body);
           grid.clearCache();
-          companyName.value = registryCode.value = '';
+          companyName.value = registryCode.value = companyAddress.value = annualRevenue.value = numberOfEmployees.value = '';
         } else {
           alert('All fields required!');
         }
@@ -77,6 +90,28 @@ export class vaadinListview {
   // get tasksSelected() {
   //   return !!this.grid && this.grid.selectedItems.length > 0;
   // }
+
+  async addCompany() {
+    // console.log(this.companyName);
+    let company = {
+      partyId: this.companyCode,
+      groupName: this.companyName,
+      officeSiteName: this.companyAddress,
+      annualRevenue: this.annualRevenue,
+      numEmployees: this.numberOfEmployees,
+      logoImageUrl: null
+    };
+    console.log(company);
+    await this.marketdataService.addCompany(company);
+  }
+
+  newOpportunity() {
+    let opportunity = { name: this.name, description: this.description, price: this.price, pipelineId: "SAMPLE_ID1", customerId: "SAMPLE_ID1", contactId: "SAMPLE_ID1", stage: this.stage };
+    if (opportunity.stage === undefined) {
+      opportunity.stage = "new";
+    }
+    this.opportunityService.createNewOpportunity(opportunity);
+  };
 
   handleSelectCompany(registryCode) {
     this.router.navigateToRoute('detailed-view', { id: registryCode });
