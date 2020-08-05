@@ -103,6 +103,7 @@ export class vaadinListview {
     };
     console.log(company);
     await this.marketdataService.addCompany(company);
+    location.reload();
   }
 
   newOpportunity() {
