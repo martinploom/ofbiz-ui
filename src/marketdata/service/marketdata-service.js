@@ -117,6 +117,26 @@ export class MarketdataService {
     }
   }
 
+  async updateCompany(body) {
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/entities/PartyGroup`,
+        {
+          method: 'PUT',
+          body: JSON.stringify({
+            partyId: body.partyId,
+            numEmployees: body.numEmployees,
+            officeSiteName: body.officeSiteName,
+            annualRevenue: body.annualRevenue
+          })
+        }
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
   // getProjectList() {
   //   return this.httpClient
   //     .fetch(this.baseUrl)

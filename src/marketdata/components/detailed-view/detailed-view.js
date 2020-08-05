@@ -25,7 +25,6 @@ export class DetailedView {
   }
 
   openEdit(company) {
-    console.log(company);
     if (this.value === 'Edit') {
       this.value = 'Save and close';
       this.close = 'Close';
@@ -52,7 +51,16 @@ export class DetailedView {
     }
   }
 
-  async updateCompany() {
-
+  async updateCompany(company) {
+    if (this.value === 'Save and close') {
+      let body = { partyId: this.company.partyId, numEmployees: this.company.numEmployees, officeSiteName: this.company.officeSiteName, annualRevenue: this.company.annualRevenue };
+      await this.marketdataService.updateCompany(body);
+      this.resetState();
+    } else {
+      this.value = 'Save and close';
+      this.close = 'Close';
+      this.showSaveAndClose = true;
+      this.canEdit = true;
+    }
   }
 }
