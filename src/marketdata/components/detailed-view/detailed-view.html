@@ -43,14 +43,48 @@
         <button class="btn btn-dark float-left mr-2" click.delegate="deleteCompany()">${close}</button>
       </div>
       <div style="margin: 70px 0px 0px 0">
-      <h2>Registrated addresses</h2>
-        <vaadin-grid theme="compact row-stripes" column-reordering-allowed>
-          <vaadin-grid-column path="_toOne_PostalAddress.address1" header="Street"></vaadin-grid-column>
-          <vaadin-grid-column path="_toOne_PostalAddress.houseNumber" header="House number"></vaadin-grid-column>
-          <vaadin-grid-column path="_toOne_PostalAddress.houseNumberExt" header="Apartment number"></vaadin-grid-column>
-          <vaadin-grid-column path="_toOne_PostalAddress.city" header="City"></vaadin-grid-column>
-        </vaadin-grid>
-      </div>
+      <h5>Registrated addresses</h5>
+        <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: address; display-data.bind: $displayAddress">
+          <thead>
+          <tr>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr repeat.for="address of $displayAddress">
+            <td>${address._toOne_PostalAddress.address1} ${address._toOne_PostalAddress.houseNumber} - ${address._toOne_PostalAddress.houseNumberExt}, ${address._toOne_PostalAddress.city}</td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
+
+      <div style="margin: 30px 0px 0px 0">
+      <h5>Annual revenue</h5>
+        <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: companyTimeperiodInfo; display-data.bind: $displayData">
+          <thead>
+          <tr>
+            <th>Year</th>
+            <th>Quarter</th>
+            <th>Month</th>
+            <th>Number of Employees</th>
+            <th>Revenue</th>
+            <th>State Taxes</th>
+            <th>Workforce Taxes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr repeat.for="companyTimeperiodInfo of $displayData">
+            <td>${companyTimeperiodInfo.year_}</td>
+            <td>${companyTimeperiodInfo.quarter}</td>
+            <td>${companyTimeperiodInfo.month_}</td>
+            <td>${companyTimeperiodInfo.numberOfEmployees}</td>
+            <td>${companyTimeperiodInfo.revenue}</td>
+            <td>${companyTimeperiodInfo.stateTaxes}</td>
+            <td>${companyTimeperiodInfo.workforceTaxes}</td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
     </div>
   </span>
 </template>
