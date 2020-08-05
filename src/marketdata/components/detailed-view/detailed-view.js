@@ -26,7 +26,7 @@ export class DetailedView {
   openEdit(company) {
     console.log(company);
     if (this.value === 'Edit') {
-      this.value = 'Close editing';
+      this.value = 'Save';
       this.showSaveAndClose = true;
       this.canEdit = true;
     } else  {
@@ -43,5 +43,9 @@ export class DetailedView {
   async deleteCompany() {
     await this.marketdataService.deleteCompany(this.registryCode);
     this.router.navigateToRoute('marketdata');
+  }
+
+  async updateCompany() {
+
   }
 }
