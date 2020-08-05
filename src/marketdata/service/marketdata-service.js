@@ -47,6 +47,41 @@ export class MarketdataService {
     }
   }
 
+  async getCompanyWithAddress(registryCode) {
+    const body = JSON.stringify({
+      'areRelationResultsMandatory': true,
+      'inputFields':
+        {
+          'partyId': registryCode
+        },
+      'fieldList': ['partyId', 'groupName', 'numEmployees', 'officeSiteName', 'annualRevenue'],
+      'entityRelations': {
+        '_toMany_PartyContactMech': {
+          'areRelationResultsMandatory': true,
+          'fieldList': ['contactMechId'],
+          'entityRelations': {
+            '_toOne_PostalAddress': {
+              'fieldList': ['city', 'address1', 'houseNumber', 'houseNumberExt']
+            }
+          }
+        }
+      }
+    });
+
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/entityquery/PartyGroup`,
+        {
+          method: 'POST',
+          body: body
+        }
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
   async getCompanyTimeperiodInfo(registryCode) {
     const body = JSON.stringify({
       inputFields: {

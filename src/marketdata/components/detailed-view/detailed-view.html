@@ -14,14 +14,14 @@
             <div style="margin: 0 30px 30px 0">
                 <span if.bind="!canEdit">${ company.partyId }</span>
                 <span if.bind="canEdit">${ company.partyId }</span>
-                <!-- <input if.bind="canEdit" type="text" class="form-control" value.bind="company.partyId"> -->
+              <!-- <input if.bind="canEdit" type="text" class="form-control" value.bind="company.partyId"> -->
             </div>
             <dt class="font-weight-light">EMPLOYEE COUNT</dt>
             <div style="margin: 0 30px 30px 0">
                 <span if.bind="!canEdit">${ company.numEmployees }</span>
                 <input if.bind="canEdit" type="text" class="form-control" value.bind="company.numEmployees">
             </div>
-            <dt class="font-weight-light">ADDRESS</dt>
+            <dt class="font-weight-light">REGION</dt>
             <div style="margin: 0 30px 30px 0">
                 <span if.bind="!canEdit">${ company.officeSiteName }</span>
                 <input if.bind="canEdit" type="text" class="form-control" value.bind="company.officeSiteName">
@@ -41,6 +41,15 @@
       <div>
         <button type="button" class="btn btn-dark float-left mr-3" click.delegate="updateCompany()">${value}</button>
         <button class="btn btn-dark float-left mr-2" click.delegate="deleteCompany()">${close}</button>
+      </div>
+      <div style="margin: 70px 0px 0px 0">
+      <h2>Registrated addresses</h2>
+        <vaadin-grid theme="compact row-stripes" column-reordering-allowed>
+          <vaadin-grid-column path="_toOne_PostalAddress.address1" header="Street"></vaadin-grid-column>
+          <vaadin-grid-column path="_toOne_PostalAddress.houseNumber" header="House number"></vaadin-grid-column>
+          <vaadin-grid-column path="_toOne_PostalAddress.houseNumberExt" header="Apartment number"></vaadin-grid-column>
+          <vaadin-grid-column path="_toOne_PostalAddress.city" header="City"></vaadin-grid-column>
+        </vaadin-grid>
       </div>
     </div>
   </span>

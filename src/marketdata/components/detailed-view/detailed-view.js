@@ -17,11 +17,18 @@ export class DetailedView {
   }
 
   async bind() {
-    let company = await this.marketdataService.getCompany(this.registryCode);
+    let company = await this.marketdataService.getCompanyWithAddress(this.registryCode);
+    // console.log(company);
     this.company = company[0];
+    console.log(this.company);
 
     let timeperiodInfo = await this.marketdataService.getCompanyTimeperiodInfo(this.registryCode);
     this.companyTimeperiodInfo = timeperiodInfo.listIt.completeList;
+    document.querySelector('vaadin-grid').items = this.company._toMany_PartyContactMech;
+
+    //const grid = document.querySelector('vaadin-grid');
+    //grid.items = this.company.officeSiteName;
+    //const officeSiteName = this.company.officeSiteName;
   }
 
   openEdit(company) {
