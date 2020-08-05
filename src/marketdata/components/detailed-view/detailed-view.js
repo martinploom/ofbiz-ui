@@ -19,12 +19,17 @@ export class DetailedView {
   async bind() {
     let company = await this.marketdataService.getCompanyWithAddress(this.registryCode);
     this.company = company[0];
-    console.log(this.company);
 
     let timeperiodInfo = await this.marketdataService.getCompanyTimeperiodInfo(this.registryCode);
     this.companyTimeperiodInfo = timeperiodInfo.listIt.completeList;
 
-    this.address = this.company._toMany_PartyContactMech;
+    if (this.company._toMany_PartyContactMech === null) {
+      this.address = [];
+      this.show = false;
+    } else {
+      this.address = this.company._toMany_PartyContactMech;
+      this.show = true;
+    }
   }
 
   openEdit(company) {

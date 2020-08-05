@@ -42,21 +42,23 @@
         <button type="button" class="btn btn-dark float-left mr-3" click.delegate="updateCompany()">${value}</button>
         <button class="btn btn-dark float-left mr-2" click.delegate="deleteCompany()">${close}</button>
       </div>
-      <div style="margin: 70px 0px 0px 0">
-      <h5>Registrated addresses</h5>
-        <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: address; display-data.bind: $displayAddress">
-          <thead>
-          <tr>
-            <th>Address</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr repeat.for="address of $displayAddress">
-            <td>${address._toOne_PostalAddress.address1} ${address._toOne_PostalAddress.houseNumber} - ${address._toOne_PostalAddress.houseNumberExt}, ${address._toOne_PostalAddress.city}</td>
-        </tr>
-        </tbody>
-        </table>
-    </div>
+      <div if="true">
+        <div style="margin: 70px 0px 0px 0">
+          <h5>Registrated addresses</h5>
+            <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: address; display-data.bind: $displayAddress">
+              <thead>
+                <tr>
+                  <th>Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr repeat.for="address of $displayAddress">
+                    <td>${address._toOne_PostalAddress.address1} ${address._toOne_PostalAddress.houseNumber} - ${address._toOne_PostalAddress.houseNumberExt}, ${address._toOne_PostalAddress.city}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
 
       <div style="margin: 30px 0px 0px 0">
       <h5>Annual revenue</h5>
