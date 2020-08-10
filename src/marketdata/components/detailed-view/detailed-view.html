@@ -92,8 +92,8 @@
               <td></td>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
+              <td>${avgEmployees}</td>
+              <td>${totalRevenue}</td>
               <td></td>
               <td></td>
             </tr>
@@ -102,17 +102,19 @@
     </div>
 
       <div style="margin: 30px 0px 0px 0">
-      <h5>Related parties</h5>
+      <h5>Related persons</h5>
         <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded"
-               aurelia-table="data.bind: companyTimeperiodInfo; display-data.bind: $displayData">
+               aurelia-table="data.bind: persons; display-data.bind: $displayPersons">
           <thead>
           <tr>
-            <th>Email</th>
+            <th>First name</th>
+            <th>Last name</th>
         </tr>
         </thead>
         <tbody>
-        <tr repeat.for="companyTimeperiodInfo of $displayData">
-            <td></td>
+        <tr repeat.for="persons of $displayPersons">
+            <td>${persons[0].firstName}</td>
+            <td>${persons[0].lastName}</td>
         </tr>
         </tbody>
         </table>

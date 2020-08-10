@@ -10,6 +10,8 @@ export class DetailedView {
     this.canEdit = false;
     this.value = 'Edit';
     this.close = 'Delete';
+    this.avgEmployees = 0;
+    this.totalRevenue = 0;
   }
 
   activate(params) {
@@ -22,14 +24,21 @@ export class DetailedView {
 
     let timeperiodInfo = await this.marketdataService.getCompanyTimeperiodInfo(this.registryCode);
     this.companyTimeperiodInfo = timeperiodInfo.listIt.completeList;
-
-    if (this.company._toMany_PartyContactMech === null) {
-      this.address = [];
-      this.show = false;
-    } else {
-      this.address = this.company._toMany_PartyContactMech;
-      this.show = true;
+    for (let i = 0; i < this.companyTimeperiodInfo.length; i++) {
+      this.avgEmployees += this.companyTimeperiodInfo[i].numberOfEmployees / this.companyTimeperiodInfo.length;
+      this.totalRevenue += this.companyTimeperiodInfo[i].revenue;
     }
+
+    let partyRelationship = await this.marketdataService.getPartyRelationship(this.registryCode);
+
+    let persons = [];
+
+    for (let i = 0; i < partyRelationship.length; i++) {
+      persons.push(await this.marketdataService.getPartyInfo(partyRelationship[i].partyIdTo));
+    }
+
+    this.persons = persons;
+    console.log(this.persons);
   }
 
   openEdit(company) {
