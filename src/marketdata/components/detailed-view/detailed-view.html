@@ -31,12 +31,12 @@
                 <span if.bind="!canEdit">${ company.annualRevenue }</span>
                 <input if.bind="canEdit" type="text" class="form-control" value.bind="company.annualRevenue">
             </div>
-        </div>
-            <dt class="font-weight-light">RELATED PARTIES</dt>
+            <dt class="font-weight-light">BUSINESS STAGE</dt>
             <div style="margin: 0 30px 30px 0">
-                <!-- <span if.bind="!canEdit">${ company.companySector }</span>
-                <input if.bind="canEdit" type="text"  class="form-control" value.bind="company.companySector"> -->
+                <span if.bind="!canEdit"></span>
+                <input if.bind="canEdit" type="text" class="form-control">
             </div>
+        </div>
         </div>
       <div>
         <button type="button" class="btn btn-dark float-left mr-3" click.delegate="updateCompany()">${value}</button>
@@ -45,7 +45,8 @@
       <div if="true">
         <div style="margin: 70px 0px 0px 0">
           <h5>Registrated addresses</h5>
-            <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: address; display-data.bind: $displayAddress">
+            <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded"
+                   aurelia-table="data.bind: address; display-data.bind: $displayAddress">
               <thead>
                 <tr>
                   <th>Address</th>
@@ -62,7 +63,8 @@
 
       <div style="margin: 30px 0px 0px 0">
       <h5>Annual revenue</h5>
-        <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: companyTimeperiodInfo; display-data.bind: $displayData">
+        <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded"
+               aurelia-table="data.bind: companyTimeperiodInfo; display-data.bind: $displayData">
           <thead>
           <tr>
             <th>Year</th>
@@ -83,6 +85,34 @@
             <td>${companyTimeperiodInfo.revenue}</td>
             <td>${companyTimeperiodInfo.stateTaxes}</td>
             <td>${companyTimeperiodInfo.workforceTaxes}</td>
+        </tr>
+        </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+    </div>
+
+      <div style="margin: 30px 0px 0px 0">
+      <h5>Related parties</h5>
+        <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded"
+               aurelia-table="data.bind: companyTimeperiodInfo; display-data.bind: $displayData">
+          <thead>
+          <tr>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr repeat.for="companyTimeperiodInfo of $displayData">
+            <td></td>
         </tr>
         </tbody>
         </table>

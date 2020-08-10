@@ -29,7 +29,7 @@ export class vaadinListview {
       const numberOfEmployees = document.querySelector('#numEmployees');
       const annualRevenue = document.querySelector('#annualRevenue');
       const companyAddress = document.querySelector('#officeSiteName');
-      //const city = document.querySelector('#officeSiteName');
+      const logoImageUrl = document.querySelector('#logoImageUrl');
 
       const addBtn = document.querySelector('#add-btn');
 
@@ -58,11 +58,18 @@ export class vaadinListview {
     });
 
     const columns = document.querySelectorAll('vaadin-grid-column');
-    columns[0].renderer = (root, column, rowData) => {
+    columns[1].renderer = (root, column, rowData) => {
       const companyName = rowData.item.groupName;
       const registryCode = rowData.item.partyId;
       root.innerHTML = `<a href="javascript:void(0);">${companyName}<a/>`;
       root.addEventListener('click', () => this.handleSelectCompany(registryCode));
+    };
+
+    columns[0].renderer = function(root, column, rowData) {
+      if (!root.firstElementChild) {
+        root.innerHTML = '<img height="25">';
+      }
+      root.firstElementChild.src = rowData.item.logoImageUrl;
     };
 
     const contextMenu = document.querySelector('vaadin-context-menu');

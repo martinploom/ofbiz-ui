@@ -16,7 +16,8 @@ export class QueryBuilder {
             {label: 'Registry code', dataField: 'salesChannelEnumId', dataType: 'number'},
             {label: 'Nr of employees', dataField: 'statusId', dataType: 'number'},
             {label: 'Revenue', dataField: 'createdStamp', dataType: 'number'},
-            {label: 'Address', dataField: 'createdStamp', dataType: 'string'}
+            {label: 'Address', dataField: 'grandTotal', dataType: 'string'},
+            {label: 'Stage', dataField: 'grandTotal', dataType: 'string'}
             // {label: 'Date since', dataField: 'createdStamp', dataType: 'date'},
             // {label: 'Date to', dataField: 'createdStamp', dataType: 'date'}
           ]
