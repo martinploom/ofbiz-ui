@@ -48,65 +48,45 @@
                   <label for="message-text" class="col-form-label">NUMBER OF EMPLOYEES</label>
                   <input type="text" class="form-control" id="company-num-of-employees" value.bind="numberOfEmployees">
                 </div>
-                <div class="input-group">
-                  <label for="message-text" class="col-form-label">REVENUE</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Price" aria-describedby="basic-addon2"
-                           value.bind="annualRevenue">
-                    <div class="input-group-append">
-                      <span class="input-group-text" id="basic-addon2">€</span>
-                    </div>
-                  </div>
-                </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">REGION</label>
                   <input type="text" class="form-control" id="opportunity-description" value.bind="companyAddress">
                 </div>
-<!--                <div class="form-group">-->
-<!--                  <label for="message-text" class="col-form-label">Stage</label>-->
-<!--                  <select class="form-control" value.bind="stage">-->
-<!--                    <option value="new" selected>New</option>-->
-<!--                    <option value="proposition">Proposition</option>-->
-<!--                    <option value="won">Won</option>-->
-<!--                  </select>-->
-<!--                </div>-->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary" click.delegate="addCompany()"
-                          data-dismiss="modal">Save</button>
-<!--                  <button type="button" class="btn btn-primary" click.delegate="newOpportunity()" data-dismiss="modal">-->
-<!--                    <a style="color: #ffffff; text-decoration: none"-->
-<!--                       route-href="route: opportunity-edit; params.bind: { name: name, description: description, price: price, stage: stage}">-->
-<!--                      Save and edit-->
-<!--                    </a>-->
-<!--                  </button>-->
-
+                          data-dismiss="modal">Save
+                  </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-
       </div>
-      <div class="modal fade" id="filterModal" tabindex="1" role="dialog" aria-labelledby="filterModalLabel">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content" style="width: unset">
-            <div class="modal-header">
-              <h5 class="modal-title" id="filterModalLabel">Filter</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div id="nav-add-subscriber">
-                <div style="display: flex; justify-content: center" class="query-builder-div">
-                  <query-builder></query-builder>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" click.delegate="applyFilter()"
-                          data-dismiss="modal">Filter</button>
 
+      <div class="col-12">
+        <div class="dropdown float-left">
+          <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content" style="width: unset">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="filterModalLabel">Filter</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div id="nav-add-subscriber">
+                    <div style="display: flex; justify-content: center" class="query-builder-div">
+                      <query-builder></query-builder>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" click.delegate="applyFilter()"
+                              data-dismiss="modal">Filter
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -115,40 +95,4 @@
       </div>
     </div>
   </div>
-
-<!--  <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title">ADD CONTACT</h5>-->
-<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--            <span aria-hidden="true">&times;</span>-->
-<!--          </button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--          <div class="form-group">-->
-<!--            <dt class="font-weight-light">COMPANY NAME</dt>-->
-<!--            <vaadin-text-field id="groupName" header="Company Name" style="width: 100%"></vaadin-text-field>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <dt class="font-weight-light">COMPANY CODE</dt>-->
-<!--            <vaadin-text-field id="partyId" header="Company Code" style="width: 100%"></vaadin-text-field>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <dt class="font-weight-light">NUMBER OF EMPLOYEES</dt>-->
-<!--            <vaadin-text-field id="numEmployees" header="Number Of Employees" style="width: 100%"></vaadin-text-field>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <dt class="font-weight-light">REVENUE</dt>-->
-<!--            <vaadin-text-field id="annualRevenue" header="Revenue" style="width: 100%"></vaadin-text-field>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <dt class="font-weight-light">REGION</dt>-->
-<!--            <vaadin-text-field id="officeSiteName" header="Company Address" style="width: 100%"></vaadin-text-field>-->
-<!--          </div>-->
-<!--          <vaadin-button id="add-btn">Add</vaadin-button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 </template>

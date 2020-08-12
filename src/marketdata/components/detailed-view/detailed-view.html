@@ -37,7 +37,12 @@
             <dt class="font-weight-light">BUSINESS STAGE</dt>
             <div style="margin: 0 30px 30px 0">
                 <span if.bind="!canEdit"></span>
-                <input if.bind="canEdit" type="text" class="form-control">
+                <select if.bind="canEdit" class="form-control" id="sel1">
+                  <option>Idea stage</option>
+                  <option>MVP/Seed stage</option>
+                  <option>Product-market fit</option>
+                  <option>Scaling stage</option>
+                </select>
             </div>
         </div>
         </div>
