@@ -20,8 +20,15 @@ export class DetailedView {
   }
 
   async bind() {
-    let company = await this.marketdataService.getCompanyWithAddress(this.registryCode);
-    this.company = company[0];
+    try {
+      let company = await this.marketdataService.getCompanyWithAddress(this.registryCode);
+      this.company = company[0];
+      this.address = this.company._toMany_PartyContactMech;
+    } catch (e) {
+      let company = await this.marketdataService.getCompany(this.registryCode);
+      this.company = company[0];
+      this.address = [];
+    }
 
     let timeperiodInfo = await this.marketdataService.getCompanyTimeperiodInfo(this.registryCode);
     this.companyTimeperiodInfo = timeperiodInfo.listIt.completeList;
@@ -30,8 +37,6 @@ export class DetailedView {
       this.avgEmployees += this.companyTimeperiodInfo[i].numberOfEmployees / this.companyTimeperiodInfo.length;
       this.totalRevenue += this.companyTimeperiodInfo[i].revenue;
     }
-
-    this.address = this.company._toMany_PartyContactMech;
 
     let partyRelationship = await this.marketdataService.getPartyRelationship(this.registryCode);
 
@@ -42,7 +47,6 @@ export class DetailedView {
     }
 
     this.persons = persons;
-    console.log(this.persons);
   }
 
   openEdit(company) {
