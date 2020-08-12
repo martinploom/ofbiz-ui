@@ -12,6 +12,7 @@ export class DetailedView {
     this.close = 'Delete';
     this.avgEmployees = 0;
     this.totalRevenue = 0;
+    this.year = 0;
   }
 
   activate(params) {
@@ -29,6 +30,8 @@ export class DetailedView {
       this.totalRevenue += this.companyTimeperiodInfo[i].revenue;
     }
 
+    this.address = this.company._toMany_PartyContactMech;
+
     let partyRelationship = await this.marketdataService.getPartyRelationship(this.registryCode);
 
     let persons = [];
@@ -38,7 +41,6 @@ export class DetailedView {
     }
 
     this.persons = persons;
-    console.log(this.persons);
   }
 
   openEdit(company) {
@@ -70,7 +72,7 @@ export class DetailedView {
 
   async updateCompany(company) {
     if (this.value === 'Save and close') {
-      let body = { partyId: this.company.partyId, numEmployees: this.company.numEmployees, officeSiteName: this.company.officeSiteName, annualRevenue: this.company.annualRevenue };
+      let body = { groupName: this.company.groupName, partyId: this.company.partyId, numEmployees: this.company.numEmployees, officeSiteName: this.company.officeSiteName, annualRevenue: this.company.annualRevenue };
       await this.marketdataService.updateCompany(body);
       this.resetState();
     } else {

@@ -1,9 +1,12 @@
 <template>
   <span class="border">
     <div class="col-md-10 my-5 mx-auto">
-      <div>
-      <h3>${company.groupName}</h3>
-      </div>
+        <div>
+          <h3>
+            <span if.bind="!canEdit">${ company.groupName }</span>
+            <input if.bind="canEdit" type="text" class="form-control" value.bind="company.groupName">
+          </h3>
+        </div>
       <hr>
       <div class="mt-3">
         <h5>General data</h5>
@@ -45,8 +48,7 @@
       <div if="true">
         <div style="margin: 70px 0px 0px 0">
           <h5>Registrated addresses</h5>
-            <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded"
-                   aurelia-table="data.bind: address; display-data.bind: $displayAddress">
+            <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: address; display-data.bind: $displayAddress">
               <thead>
                 <tr>
                   <th>Address</th>

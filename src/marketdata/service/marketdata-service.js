@@ -192,6 +192,7 @@ export class MarketdataService {
         {
           method: 'PUT',
           body: JSON.stringify({
+            groupName: body.groupName,
             partyId: body.partyId,
             numEmployees: body.numEmployees,
             officeSiteName: body.officeSiteName,
