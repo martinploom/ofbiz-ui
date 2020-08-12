@@ -6,7 +6,7 @@ import { MarketdataService } from '../../service/marketdata-service';
 
 @autoinject
 @inject(Router, MarketdataService)
-export class vaadinListview {
+export class VaadinListView {
   constructor(router, marketdataService) {
     this.router = router;
     this.marketdataService = marketdataService;
@@ -119,9 +119,13 @@ export class vaadinListview {
       opportunity.stage = "new";
     }
     this.opportunityService.createNewOpportunity(opportunity);
-  };
+  }
 
   handleSelectCompany(registryCode) {
     this.router.navigateToRoute('detailed-view', { id: registryCode });
+  }
+
+  hello() {
+    console.log(this.companies);
   }
 }
