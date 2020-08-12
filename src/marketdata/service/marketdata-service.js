@@ -155,6 +155,39 @@ export class MarketdataService {
     }
   }
 
+  async getPartyRelationship(registryCode) {
+    const body = JSON.stringify({
+      'inputFields': {
+        'partyIdFrom': registryCode
+      },
+      'fieldList': ['partyIdTo']
+    });
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/entityquery/PartyRelationship`,
+        {
+          method: 'POST',
+          body: body
+        }
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async getPartyInfo(partyId) {
+    console.log('hello');
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/entities/Person?partyId=${partyId}`
+      );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
   async createCompany(body) {
     try {
       const response = await this.httpClient.fetch(
@@ -179,6 +212,7 @@ export class MarketdataService {
         {
           method: 'PUT',
           body: JSON.stringify({
+            groupName: body.groupName,
             partyId: body.partyId,
             numEmployees: body.numEmployees,
             officeSiteName: body.officeSiteName,
