@@ -43,12 +43,14 @@
         </div>
       <div>
         <button type="button" class="btn btn-dark float-left mr-3" click.delegate="updateCompany()">${value}</button>
-        <button class="btn btn-dark float-left mr-2" click.delegate="deleteCompany()">${close}</button>
+        <button type="button" class="btn btn-dark float-left mr-3" data-toggle="modal"
+                href="#deleteCompany">${close}</button>
       </div>
       <div if="true">
         <div style="margin: 70px 0px 0px 0">
           <h5>Registrated addresses</h5>
-            <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded" aurelia-table="data.bind: address; display-data.bind: $displayAddress">
+            <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded"
+                   aurelia-table="data.bind: address; display-data.bind: $displayAddress">
               <thead>
                 <tr>
                   <th>Address</th>
@@ -89,17 +91,26 @@
             <td>${companyTimeperiodInfo.workforceTaxes}</td>
         </tr>
         </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>${avgEmployees}</td>
-              <td>${totalRevenue}</td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tfoot>
+        </table>
+    </div>
+
+      <div style="margin: 30px 0px 0px 0">
+        <table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded"
+               aurelia-table="data.bind: companyTimeperiodInfo; display-data.bind: $displayData">
+          <thead>
+          <tr>
+            <th>Year</th>
+            <th>Average Number of Employees</th>
+            <th>Total Revenue</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr for="companyTimeperiodInfo of $displayData">
+            <td>${year}</td>
+            <td>${avgEmployees}</td>
+            <td>${totalRevenue}</td>
+        </tr>
+        </tbody>
         </table>
     </div>
 
@@ -123,4 +134,36 @@
     </div>
     </div>
   </span>
+
+  <div class="col-12">
+    <div class="dropdown float-right">
+      <div class="modal fade" id="deleteCompany" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Delete company</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form role="form" id="opportunityForm">
+                <div class="form-group">
+                  <label class="col-form-label">Are you sure you want to delete "${ company.groupName }" from
+                    database?</label>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" click.delegate="deleteCompany()" data-dismiss="modal">
+                    Delete
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

@@ -26,6 +26,7 @@ export class DetailedView {
     let timeperiodInfo = await this.marketdataService.getCompanyTimeperiodInfo(this.registryCode);
     this.companyTimeperiodInfo = timeperiodInfo.listIt.completeList;
     for (let i = 0; i < this.companyTimeperiodInfo.length; i++) {
+      this.year = this.companyTimeperiodInfo[0].year_;
       this.avgEmployees += this.companyTimeperiodInfo[i].numberOfEmployees / this.companyTimeperiodInfo.length;
       this.totalRevenue += this.companyTimeperiodInfo[i].revenue;
     }
@@ -41,6 +42,7 @@ export class DetailedView {
     }
 
     this.persons = persons;
+    console.log(this.persons);
   }
 
   openEdit(company) {
