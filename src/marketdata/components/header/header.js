@@ -1,17 +1,19 @@
 import { inject } from 'aurelia-dependency-injection';
 import { autoinject } from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { MarketdataService } from '../../service/marketdata-service';
-import {VaadinListView} from '../vaadin-list/vaadin-listview';
+import { VaadinListView } from '../vaadin-list/vaadin-listview';
+import { MarketdataCompanies } from '../../data/MarketdataCompanies';
 
 @autoinject
 @inject(VaadinListView, MarketdataService, EventAggregator)
 export class Header {
   companies = [];
 
-  constructor(vaadinListView, marketdataService, navigationService, ) {
+  constructor(vaadinListView, marketdataService, ea) {
     this.vaadinListView = vaadinListView;
     this.marketdataService = marketdataService;
+    this.ea = ea;
   }
 
   bind() { }
@@ -35,22 +37,20 @@ export class Header {
   }
 
   async applyFilter() {
-    var body = this.getFilterFromComponent();
-    // console.log(body);
-    // const vaadinList = document.querySelectorAll('vaadin-list-view');
-    // console.log(vaadinList);
-    // this.vaadinListView.hello();
-    var filteredCompanies = await this.marketdataService.getFilteredCompanies(body);
-    // var filteredCompanies = await this.marketdataService.getAllCompanies();
-    console.log(filteredCompanies);
-    // var newData = [];
-    // var filteredData = await this.opportunityService.filter(body);
-    // filteredData["result"].forEach(function (opportunity) {
-    //   newData.push(opportunity);
-    // });
-    // this.store.opportunities = newData;
-    //
-    // this.separateOpportunities(newData);
+    let body = this.getFilterFromComponent();
+    console.log('body of applyFilter');
+    console.log(body);
+    let filterResult;
+    if (!body) {
+      console.log('no body');
+      filterResult = await this.marketdataService.getAllCompanies();
+      filterResult = filterResult.listIt.completeList;
+    } else {
+      console.log('body');
+      filterResult = await this.marketdataService.getFilteredCompanies(body);
+      filterResult = filterResult.result;
+    }
+    this.ea.publish(new MarketdataCompanies(filterResult));
   }
 
   getFilterFromComponent() {
@@ -63,6 +63,18 @@ export class Header {
     for (let i = 0; i < queryArray.length; i++) {
       if (typeof queryArray[i] === 'object') {
         let filterComponent = [];
+        filter = {
+          'fieldName': 'partyId',
+          'operation': 'greaterThanEqualTo',
+          'value': 10000000
+        };
+        filterComponent.push(filter);
+        filter = {
+          'fieldName': 'partyId',
+          'operation': 'lessThanEqualTo',
+          'value': 99999999
+        };
+        filterComponent.push(filter);
         for (let j = 0; j < queryArray[i].length; j++) {
           const data = queryArray[i][j];
           if (typeof data === 'object') {
@@ -71,13 +83,15 @@ export class Header {
               filter = {
                 'fieldName': data[0],
                 'operation': this.dataOperatorMapping[data[1]],
-                'value': Date.parse(data[2])
+                'value': Date.parse(data[2]),
+                'ignoreCase': true
               };
             } else {
               filter = {
                 'fieldName': data[0],
                 'operation': this.dataOperatorMapping[data[1]],
-                'value': data[2]
+                'value': data[2],
+                'ignoreCase': true
               };
             }
             filterComponent.push(filter);
@@ -97,11 +111,11 @@ export class Header {
     '>=': 'greaterThanEqualTo',
     '=': 'equals',
     '<>': 'notEqual',
-    'startswith': '',
+    'startswith': 'like',
     'endswith': '',
-    'contains': '',
-    'notcontains': '',
-    'isblank': '',
+    'contains': 'contains',
+    'notcontains': 'notContains',
+    'isblank': 'empty',
     'isnotblank': ''
   }
 }
