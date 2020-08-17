@@ -22,7 +22,7 @@
       Filter
     </button>
 
-    <button type="button" class="btn btn-outline-dark">
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" href="#importContactsModal">
       Import contacts
     </button>
   </nav>
@@ -45,6 +45,38 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary" click.delegate="applyFilter()"
                       data-dismiss="modal">Filter</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="importContactsModal" tabindex="1" role="dialog" aria-labelledby="filterModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="width: unset">
+        <div class="modal-header">
+          <h5 class="modal-title" id="importContactsModalLabel">Import data</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="nav-add-subscriber?">
+            <div style="display: flex; justify-content: center" class="query-builder-div">
+              <form id="csvForm">
+                Year:
+                <input id="year"></input><br>
+                Quarter:
+
+                <input id="upload" type="file">
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" click.delegate="applyFilter()"
+                      data-dismiss="modal">Import</button>
 
             </div>
           </div>
