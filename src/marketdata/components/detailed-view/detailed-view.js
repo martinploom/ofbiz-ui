@@ -36,6 +36,7 @@ export class DetailedView {
       this.year = this.companyTimeperiodInfo[0].year_;
       this.avgEmployees += this.companyTimeperiodInfo[i].numberOfEmployees / this.companyTimeperiodInfo.length;
       this.totalRevenue += this.companyTimeperiodInfo[i].revenue;
+      this.importDate = new Date(this.companyTimeperiodInfo[i].dateImported);
     }
 
     let partyRelationship = await this.marketdataService.getPartyRelationship(this.registryCode);
