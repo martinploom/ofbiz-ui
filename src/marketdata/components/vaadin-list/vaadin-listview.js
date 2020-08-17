@@ -16,19 +16,19 @@ export class VaadinListView {
     this.faEllipsisV = faEllipsisV;
     // ToDo: Add unsubscribe when it is exited
     this.ea.subscribe(MarketdataCompanies, msg => {
-      this.companies = msg.listOfCompanies;
-      const grid = document.querySelector('vaadin-grid');
-      this.initGridColumns();
-      grid.items = this.companies;
+      this.updateTable(msg.listOfCompanies);
     });
   }
 
   async attached() {
+    let companies = await this.marketdataService.getAllCompanies();
+    this.updateTable(companies.listIt.completeList);
+  }
+
+  updateTable(tableContent) {
     const grid = document.querySelector('vaadin-grid');
     this.initGridColumns();
-    let companies = await this.marketdataService.getAllCompanies();
-    this.companies = companies.listIt.completeList;
-    grid.items = this.companies;
+    grid.items = tableContent;
   }
 
   initGridColumns() {
@@ -118,9 +118,11 @@ export class VaadinListView {
       numEmployees: this.numberOfEmployees,
       logoImageUrl: null
     };
-    console.log(company);
+    // console.log(company);
     await this.marketdataService.addCompany(company);
-    location.reload();
+    let companies = await this.marketdataService.getAllCompanies();
+    this.updateTable(companies.listIt.completeList);
+    // location.reload();
   }
 
   handleSelectCompany(registryCode) {
