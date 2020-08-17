@@ -130,3 +130,7 @@ ul.custom-pagination li a.disabled {
 .column-marketdata {
   display: table-cell;
 }
+
+.modal.marketdata {
+
+}

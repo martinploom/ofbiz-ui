@@ -43,7 +43,6 @@ export class vaadinListview {
             officeSiteName: companyAddress.value,
             annualRevenue: annualRevenue.value,
             numEmployees: numberOfEmployees.value,
-            logoImageUrl: ''
           });
           console.log(body);
           this.addCompany(body);
