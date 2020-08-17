@@ -12,6 +12,7 @@ export class MarketdataService {
   }
 
   async getAllCompanies() {
+    console.log('getAllCompanies');
     const body = JSON.stringify({
       inputFields: {
         partyId_fld0_op: 'greaterThanEqualTo',
@@ -30,6 +31,25 @@ export class MarketdataService {
           body: body
         }
       );
+      return await response.json();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async getFilteredCompanies(body) {
+    console.log('getFilteredCompanies');
+    try {
+      const response = await this.httpClient.fetch(
+        `${this.baseUrl}/services/performFilteredSearch`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            filterParameters: body,
+            entityName: 'PartyGroup'
+          }
+          )
+        });
       return await response.json();
     } catch (e) {
       return null;

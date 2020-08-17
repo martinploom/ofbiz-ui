@@ -23,4 +23,4 @@ The response will be something like this
 ```
 Now one must take these `PARTY_ID`s and make another GET request for all of them to
 <br>`api/generic/v1/entities/Person?partyId=PARTY_ID`
-<br> to get persons' info ...
+<br> to get persons' info ... Not the nicest approach, but currently don't know a better way.

@@ -1,22 +1,32 @@
 import { inject } from 'aurelia-dependency-injection';
 import { autoinject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { Router } from 'aurelia-router';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { MarketdataService } from '../../service/marketdata-service';
+import { MarketdataCompanies } from '../../data/MarketdataCompanies';
 
 @autoinject
-@inject(Router, MarketdataService)
-export class vaadinListview {
-  constructor(router, marketdataService) {
+@inject(Router, MarketdataService, EventAggregator)
+export class VaadinListView {
+  constructor(router, marketdataService, ea) {
     this.router = router;
     this.marketdataService = marketdataService;
+    this.ea = ea;
     this.faEllipsisV = faEllipsisV;
+    // ToDo: Add unsubscribe when it is exited
+    this.ea.subscribe(MarketdataCompanies, msg => {
+      this.companies = msg.listOfCompanies;
+      const grid = document.querySelector('vaadin-grid');
+      this.initGridColumns();
+      grid.items = this.companies;
+    });
   }
 
   async attached() {
     const grid = document.querySelector('vaadin-grid');
     this.initGridColumns();
-    const companies = await this.marketdataService.getAllCompanies();
+    let companies = await this.marketdataService.getAllCompanies();
     this.companies = companies.listIt.completeList;
     grid.items = this.companies;
   }
@@ -112,15 +122,11 @@ export class vaadinListview {
     location.reload();
   }
 
-  newOpportunity() {
-    let opportunity = { name: this.name, description: this.description, price: this.price, pipelineId: "SAMPLE_ID1", customerId: "SAMPLE_ID1", contactId: "SAMPLE_ID1", stage: this.stage };
-    if (opportunity.stage === undefined) {
-      opportunity.stage = "new";
-    }
-    this.opportunityService.createNewOpportunity(opportunity);
-  };
-
   handleSelectCompany(registryCode) {
     this.router.navigateToRoute('detailed-view', { id: registryCode });
+  }
+
+  hello() {
+    console.log(this.companies);
   }
 }
