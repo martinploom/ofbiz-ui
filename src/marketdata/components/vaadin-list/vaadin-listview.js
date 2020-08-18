@@ -1,10 +1,10 @@
-import { inject } from 'aurelia-dependency-injection';
-import { autoinject } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
-import { Router } from 'aurelia-router';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import { MarketdataService } from '../../service/marketdata-service';
-import { MarketdataCompanies } from '../../data/MarketdataCompanies';
+import {inject} from 'aurelia-dependency-injection';
+import {autoinject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {Router} from 'aurelia-router';
+import {faEllipsisV} from '@fortawesome/free-solid-svg-icons';
+import {MarketdataService} from '../../service/marketdata-service';
+import {MarketdataCompanies} from '../../data/MarketdataCompanies';
 
 @autoinject
 @inject(Router, MarketdataService, EventAggregator)
@@ -22,7 +22,11 @@ export class VaadinListView {
 
   async attached() {
     let companies = await this.marketdataService.getAllCompanies();
-    this.updateTable(companies.listIt.completeList);
+    this.companies = companies;
+    this.companyName = this.companies.groupName;
+    this.companyCode = this.companies.partyId;
+    console.log(this.companies);
+    //this.updateTable(companies.listIt.completeList);
   }
 
   updateTable(tableContent) {
@@ -39,7 +43,6 @@ export class VaadinListView {
       const numberOfEmployees = document.querySelector('#numEmployees');
       const annualRevenue = document.querySelector('#annualRevenue');
       const companyAddress = document.querySelector('#officeSiteName');
-      const logoImageUrl = document.querySelector('#logoImageUrl');
 
       const addBtn = document.querySelector('#add-btn');
 
@@ -52,7 +55,7 @@ export class VaadinListView {
             groupName: companyName.value,
             officeSiteName: companyAddress.value,
             annualRevenue: annualRevenue.value,
-            numEmployees: numberOfEmployees.value,
+            numEmployees: numberOfEmployees.value
           });
           console.log(body);
           this.addCompany(body);
@@ -125,10 +128,6 @@ export class VaadinListView {
   }
 
   handleSelectCompany(registryCode) {
-    this.router.navigateToRoute('detailed-view', { id: registryCode });
-  }
-
-  hello() {
-    console.log(this.companies);
+    this.router.navigateToRoute('detailed-view', {id: registryCode});
   }
 }
