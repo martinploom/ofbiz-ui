@@ -23,7 +23,7 @@ export class MarketdataService {
           'partyId_fld1_op': 'lessThanEqualTo',
           'partyId_fld1_value': 99999999
         },
-      'fieldList': ['partyId', 'groupName'],
+      'fieldList': ['partyId', 'groupName', 'logoImageUrl'],
       'entityRelations': {
         '_toMany_PartyContactMech': {
           'areRelationResultsMandatory': false,
