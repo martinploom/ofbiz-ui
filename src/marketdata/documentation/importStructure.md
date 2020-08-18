@@ -10,7 +10,9 @@ Do a POST request to URL `api/generic/v1/entityquery/PartyGroup`
     "timestamp": "GENERATED_TIMESTAMP_BY_FRONT",
     "listOfQuarterInfo": [
         {
-            DATA_FROM_IMPORTED_FILE_FOR_COMPANY
+            "partyId": "DATA FROM FILE REGISTRIKOOD",
+            "GroupName": "DATA FROM FILE NIMI",
+            ...
         },
         {
             DATA_FROM_IMPORTED_FILE_FOR_ANOTHER_COMPANY

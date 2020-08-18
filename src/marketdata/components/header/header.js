@@ -1,9 +1,9 @@
-import { inject } from 'aurelia-dependency-injection';
-import { autoinject } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
-import { MarketdataService } from '../../service/marketdata-service';
-import { VaadinListView } from '../vaadin-list/vaadin-listview';
-import { MarketdataCompanies } from '../../data/MarketdataCompanies';
+import {inject} from 'aurelia-dependency-injection';
+import {autoinject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {MarketdataService} from '../../service/marketdata-service';
+import {VaadinListView} from '../vaadin-list/vaadin-listview';
+import {MarketdataCompanies} from '../../data/MarketdataCompanies';
 
 @autoinject
 @inject(VaadinListView, MarketdataService, EventAggregator)
@@ -17,10 +17,11 @@ export class Header {
   }
 
   bind() {
-    document.getElementById("upload").addEventListener("change", upload, false);
+    document.getElementById('upload').addEventListener('change', upload, false);
   }
 
-  attached() { }
+  attached() {
+  }
 
   submitData() {
     let company = {
@@ -39,71 +40,108 @@ export class Header {
   }
 
   async applyFilter() {
-    let body = this.getFilterFromComponent();
-    console.log('body of applyFilter');
-    console.log(body);
+    let listOfFilters = this.getFilterFromComponent();
+    console.log('List of filters from builder');
+    console.log(listOfFilters);
     let filterResult;
-    if (!body) {
-      console.log('no body');
-      filterResult = await this.marketdataService.getAllCompanies();
-      filterResult = filterResult.listIt.completeList;
-    } else {
-      console.log('body');
-      filterResult = await this.marketdataService.getFilteredCompanies(body);
-      filterResult = filterResult.result;
-    }
+
+    // if (!body) {
+    //   console.log('no body');
+    //   filterResult = await this.marketdataService.getAllCompanies();
+    //   filterResult = filterResult.listIt.completeList;
+    // } else {
+    //   console.log('body');
+    //   filterResult = await this.marketdataService.getFilteredCompanies(body);
+    //   filterResult = filterResult.result;
+    // }
+    filterResult = await this.marketdataService.getFilteredCompanies(listOfFilters);
+    filterResult = filterResult.result;
     this.ea.publish(new MarketdataCompanies(filterResult));
   }
 
   getFilterFromComponent() {
     const queryBuilders = document.querySelectorAll('smart-query-builder');
-    console.log(queryBuilders);
+    // console.log(queryBuilders);
     let queryBuilder = queryBuilders[0];
     let queryArray = queryBuilder.value;
-    console.log(queryArray);
+    // console.log(queryArray);
+    let sequenceHolder = {
+      'partyId': 2,
+      'groupName': 0,
+      'city': 0,
+      'numEmployees': 0,
+      'annualRevenue': 0
+    };
+    let partyGroupFilters = {
+      'partyId_fld0_op': 'greaterThanEqualTo',
+      'partyId_fld0_value': '10000000',
+      'partyId_fld1_op': 'lessThanEqualTo',
+      'partyId_fld1_value': '99999999'
+    };
+    let cityFilters = {};
+    let partyQuarterFilters = {
+      'periodType_fld0_op': 'like',
+      'periodType_fld0_value': 'year',
+      'year__fld0_op': 'equals',
+      'year__fld0_value': '2019'
+    };
+
     let filters = [];
     for (let i = 0; i < queryArray.length; i++) {
       if (typeof queryArray[i] === 'object') {
-        let filterComponent = [];
-        filter = {
-          'fieldName': 'partyId',
-          'operation': 'greaterThanEqualTo',
-          'value': 10000000
-        };
-        filterComponent.push(filter);
-        filter = {
-          'fieldName': 'partyId',
-          'operation': 'lessThanEqualTo',
-          'value': 99999999
-        };
-        filterComponent.push(filter);
         for (let j = 0; j < queryArray[i].length; j++) {
           const data = queryArray[i][j];
           if (typeof data === 'object') {
-            var filter;
-            if (data[0] === "createdStamp") {
-              filter = {
-                'fieldName': data[0],
-                'operation': this.dataOperatorMapping[data[1]],
-                'value': Date.parse(data[2]),
-                'ignoreCase': true
-              };
-            } else {
-              filter = {
-                'fieldName': data[0],
-                'operation': this.dataOperatorMapping[data[1]],
-                'value': data[2],
-                'ignoreCase': true
-              };
+            let filter = {};
+            let base = `${data[0]}` + '_fld' + `${sequenceHolder[data[0]]}`;
+            let op = `${base}` + '_op';
+            let value = base + '_value';
+            let ic = base + '_ic';
+
+            filter[op] = this.dataOperatorMapping[data[1]];
+            filter[value] = data[2];
+            filter[ic] = 'Y';
+
+            switch (data[0]) {
+              case 'partyId':
+                partyGroupFilters[op] = this.dataOperatorMapping[data[1]];
+                partyGroupFilters[value] = data[2];
+                partyGroupFilters[ic] = 'Y';
+                break;
+              case 'groupName':
+                partyGroupFilters[op] = this.dataOperatorMapping[data[1]];
+                partyGroupFilters[value] = data[2];
+                partyGroupFilters[ic] = 'Y';
+                break;
+              case 'city':
+                cityFilters[op] = this.dataOperatorMapping[data[1]];
+                cityFilters[value] = data[2];
+                cityFilters[ic] = 'Y';
+                break;
+              case 'numEmployees':
+                partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
+                partyQuarterFilters[value] = data[2];
+                break;
+              case 'annualRevenue':
+                partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
+                partyQuarterFilters[value] = data[2];
+                break;
+              default:
+                console.log('default method of switch');
             }
-            filterComponent.push(filter);
+            // console.log('This is filter');
+            // console.log(filter);
+
+            sequenceHolder[data[0]] = sequenceHolder[data[0]] + 1;
+
+            // filterComponent.push(filter);
           }
         }
-        filters.push(filterComponent);
+        // filters.push(filterComponent);
       }
     }
     console.log(filters[0]);
-    return filters[0];
+    return [partyGroupFilters, cityFilters, partyQuarterFilters];
   }
 
   dataOperatorMapping = {
@@ -122,24 +160,23 @@ export class Header {
   }
 
 
-
   upload(e) {
     console.log('upload');
     console.log(e);
-    var data = null;
-    var file = e.target.files[0];
+    let data = null;
+    let file = e.target.files[0];
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function (event) {
-      var csvData = event.target.result;
+      let csvData = event.target.result;
 
-      var parsedCSV = d3.csv.parseRows(csvData);
+      let parsedCSV = d3.csv.parseRows(csvData);
 
       parsedCSV.forEach(function (d, i) {
         if (i == 0) return true; // skip the header
         document.getElementById(d[0]).value = d[1];
       });
-    }
+    };
   }
 }
