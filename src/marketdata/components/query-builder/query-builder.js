@@ -14,9 +14,8 @@ export class QueryBuilder {
             {label: 'Company name', dataField: 'groupName', dataType: 'string'},
             {label: 'Company code', dataField: 'partyId', dataType: 'number'},
             {label: 'Number of employees', dataField: 'numEmployees', dataType: 'number'},
-            {label: 'Revenue (last year)', dataField: 'annualRevenue', dataType: 'number'},
-            {label: 'Revenue (last quarter)', dataField: 'annualRevenue', dataType: 'number'},
-            {label: 'Region', dataField: 'officeSiteName', dataType: 'string'}
+            {label: 'Revenue', dataField: 'annualRevenue', dataType: 'number'},
+            {label: 'City', dataField: 'officeSiteName', dataType: 'string'}
           ]
         };
       }
