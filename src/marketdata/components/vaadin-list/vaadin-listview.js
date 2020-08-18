@@ -25,13 +25,13 @@ export class VaadinListView {
   async attached() {
     let companies = await this.marketdataService.getAllCompanies();
     this.companies = companies;
-    console.log(this.companies);
-    console.log(this.companies[0]._toMany_PartyQuarter[0].numberOfEmployees);
+    // console.log(this.companies);
+    // console.log(this.companies[0]._toMany_PartyQuarter[0].numberOfEmployees);
     for (let i = 0; i < this.companies.length; i++) {
       try {
         this.companies[i].numEmployees = this.companies[i]._toMany_PartyQuarter[0].numberOfEmployees;
         this.companies[i].annualRevenue = this.companies[i]._toMany_PartyQuarter[0].revenue;
-        this.companies[i].officeSiteName = this.companies[i]._toMany_PartyContactMech[0]._toOne_PostalAddress[0].city;
+        this.companies[i].officeSiteName = this.companies[i]._toMany_PartyContactMech[0]._toOne_PostalAddress.city;
       } catch (e) {
 
       }
@@ -46,7 +46,7 @@ export class VaadinListView {
   }
 
   initGridColumns() {
-    customElements.whenDefined('vaadin-grid').then(function () {
+    customElements.whenDefined('vaadin-grid').then(function() {
       const grid = document.querySelector('vaadin-grid');
       const companyName = document.querySelector('#groupName');
       const registryCode = document.querySelector('#partyId');
@@ -56,7 +56,7 @@ export class VaadinListView {
 
       const addBtn = document.querySelector('#add-btn');
 
-      addBtn.addEventListener('click', async function () {
+      addBtn.addEventListener('click', async function() {
         if (companyName.value && registryCode.value) {
           // let demodata = grid.items.unshift({companyName: companyName.value, registryCode: registryCode.value, numberOfEmployees: numberOfEmployees.value, companyAddress: companyAddress.value, annualRevenue: annualRevenue.value});
           // console.log(registryCode.value);
@@ -87,7 +87,7 @@ export class VaadinListView {
       root.addEventListener('click', () => this.handleSelectCompany(registryCode));
     };
 
-    columns[0].renderer = function (root, column, rowData) {
+    columns[0].renderer = function(root, column, rowData) {
       if (!root.firstElementChild) {
         root.innerHTML = '<img height="25">';
       }
@@ -121,7 +121,6 @@ export class VaadinListView {
   // }
 
   async addCompany() {
-    // console.log(this.companyName);
     let company = {
       partyId: this.companyCode,
       groupName: this.companyName,
