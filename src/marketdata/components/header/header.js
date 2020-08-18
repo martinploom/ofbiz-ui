@@ -17,7 +17,8 @@ export class Header {
   }
 
   bind() {
-    document.getElementById("upload").addEventListener("change", upload, false);
+    //let importedFile = document.getElementById('uploadFile');
+    //document.getElementById('uploadFile').addEventListener('uploadFile', csvJSON, false);
   }
 
   attached() { }
@@ -121,8 +122,8 @@ export class Header {
     'isnotblank': ''
   }
 
-  csvJSON(csv) {
-    let file = csv.toString();
+  csvJSON(e) {
+    let file = e + '';
     let lines = file.split('\n');
 
     let result = [];
