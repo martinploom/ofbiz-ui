@@ -14,18 +14,41 @@ export class MarketdataService {
   async getAllCompanies() {
     console.log('getAllCompanies');
     const body = JSON.stringify({
-      inputFields: {
-        partyId_fld0_op: 'greaterThanEqualTo',
-        partyId_fld0_value: 10000000,
+      'areRelationResultsMandatory': false,
+      'inputFields':
+        {
+          'partyId_fld0_op': 'greaterThanEqualTo',
+          'partyId_fld0_value': '10000000',
 
-        partyId_fld1_op: 'lessThanEqualTo',
-        partyId_fld1_value: 99999999
-      },
-      entityName: 'PartyGroup'
+          'partyId_fld1_op': 'lessThanEqualTo',
+          'partyId_fld1_value': 99999999
+        },
+      'fieldList': ['partyId', 'groupName', 'logoImageUrl'],
+      'entityRelations': {
+        '_toMany_PartyContactMech': {
+          'areRelationResultsMandatory': false,
+          'fieldList': ['contactMechId'],
+          'entityRelations': {
+            '_toOne_PostalAddress': {
+              'fieldList': ['city']
+            }
+          }
+        },
+        '_toMany_PartyQuarter': {
+          'areRelationResultsMandatory': false,
+          'inputFields': {
+            'periodType_fld0_op': 'like',
+            'periodType_fld0_value': 'year',
+            'year__fld0_op': 'equals',
+            'year__fld0_value': '2019'
+          },
+          'fieldList': ['revenue', 'numberOfEmployees']
+        }
+      }
     });
     try {
       const response = await this.httpClient.fetch(
-        `${this.baseUrl}/services/performFind`,
+        `${this.baseUrl}/entityquery/PartyGroup`,
         {
           method: 'POST',
           body: body

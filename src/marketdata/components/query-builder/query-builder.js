@@ -13,8 +13,8 @@ export class QueryBuilder {
           fields: [
             {label: 'Company name', dataField: 'groupName', dataType: 'string'},
             {label: 'Company code', dataField: 'partyId', dataType: 'number'},
-            {label: 'Number of employees', dataField: 'numEmployees', dataType: 'number'},
-            {label: 'Revenue', dataField: 'annualRevenue', dataType: 'number'},
+            {label: 'Number of employees', dataField: 'numberOfEmployees', dataType: 'number'},
+            {label: 'Revenue', dataField: 'revenue', dataType: 'number'},
             {label: 'City', dataField: 'city', dataType: 'string'}
           ]
         };

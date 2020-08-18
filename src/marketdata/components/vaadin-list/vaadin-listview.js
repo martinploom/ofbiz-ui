@@ -1,10 +1,10 @@
-import { inject } from 'aurelia-dependency-injection';
-import { autoinject } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
-import { Router } from 'aurelia-router';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import { MarketdataService } from '../../service/marketdata-service';
-import { MarketdataCompanies } from '../../data/MarketdataCompanies';
+import {inject} from 'aurelia-dependency-injection';
+import {autoinject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {Router} from 'aurelia-router';
+import {faEllipsisV} from '@fortawesome/free-solid-svg-icons';
+import {MarketdataService} from '../../service/marketdata-service';
+import {MarketdataCompanies} from '../../data/MarketdataCompanies';
 
 @autoinject
 @inject(Router, MarketdataService, EventAggregator)
@@ -14,6 +14,8 @@ export class VaadinListView {
     this.marketdataService = marketdataService;
     this.ea = ea;
     this.faEllipsisV = faEllipsisV;
+    this.numEmployees = 0;
+    this.annualRevenue = 0;
     // ToDo: Add unsubscribe when it is exited
     this.ea.subscribe(MarketdataCompanies, msg => {
       this.updateTable(msg.listOfCompanies);
@@ -22,12 +24,25 @@ export class VaadinListView {
 
   async attached() {
     let companies = await this.marketdataService.getAllCompanies();
-    this.updateTable(companies.listIt.completeList);
+    this.companies = companies;
+    // console.log(this.companies);
+    // console.log(this.companies[0]._toMany_PartyQuarter[0].numberOfEmployees);
+
+    this.updateTable(this.companies);
   }
 
   updateTable(tableContent) {
     const grid = document.querySelector('vaadin-grid');
     this.initGridColumns();
+    for (let i = 0; i < tableContent.length; i++) {
+      try {
+        tableContent[i].numEmployees = tableContent[i]._toMany_PartyQuarter[0].numberOfEmployees;
+        tableContent[i].annualRevenue = tableContent[i]._toMany_PartyQuarter[0].revenue;
+        tableContent[i].officeSiteName = tableContent[i]._toMany_PartyContactMech[0]._toOne_PostalAddress.city;
+      } catch (e) {
+
+      }
+    }
     grid.items = tableContent;
   }
 
@@ -39,7 +54,6 @@ export class VaadinListView {
       const numberOfEmployees = document.querySelector('#numEmployees');
       const annualRevenue = document.querySelector('#annualRevenue');
       const companyAddress = document.querySelector('#officeSiteName');
-      const logoImageUrl = document.querySelector('#logoImageUrl');
 
       const addBtn = document.querySelector('#add-btn');
 
@@ -52,7 +66,7 @@ export class VaadinListView {
             groupName: companyName.value,
             officeSiteName: companyAddress.value,
             annualRevenue: annualRevenue.value,
-            numEmployees: numberOfEmployees.value,
+            numEmployees: numberOfEmployees.value
           });
           console.log(body);
           this.addCompany(body);
@@ -108,7 +122,6 @@ export class VaadinListView {
   // }
 
   async addCompany() {
-    // console.log(this.companyName);
     let company = {
       partyId: this.companyCode,
       groupName: this.companyName,
@@ -125,10 +138,6 @@ export class VaadinListView {
   }
 
   handleSelectCompany(registryCode) {
-    this.router.navigateToRoute('detailed-view', { id: registryCode });
-  }
-
-  hello() {
-    console.log(this.companies);
+    this.router.navigateToRoute('detailed-view', {id: registryCode});
   }
 }

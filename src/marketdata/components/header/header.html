@@ -22,7 +22,7 @@
       Filter
     </button>
 
-    <button type="button" class="btn btn-outline-dark" data-toggle="modal" href="#importContactsModal">
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" href="#uploadCompanies">
       Import contacts
     </button>
   </nav>
@@ -44,7 +44,8 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary" click.delegate="applyFilter()"
-                      data-dismiss="modal">Filter</button>
+                      data-dismiss="modal">Filter
+              </button>
 
             </div>
           </div>
@@ -53,31 +54,44 @@
     </div>
   </div>
 
-  <div class="modal fade" id="importContactsModal" tabindex="1" role="dialog" aria-labelledby="filterModalLabel">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content" style="width: unset">
-        <div class="modal-header">
-          <h5 class="modal-title" id="importContactsModalLabel">Import data</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="nav-add-subscriber?">
-            <div style="display: flex; justify-content: center" class="query-builder-div">
-              <form id="csvForm">
-                Year:
-                <input id="year"></input><br>
-                Quarter:
-
-                <input id="upload" type="file">
-              </form>
+  <div class="col-12">
+    <div class="dropdown float-right">
+      <div class="modal fade" id="uploadCompanies" tabindex="-1" role="dialog" aria-labelledby="uploadCompanies"
+           aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="uploadModalLabel">Import Data</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" click.delegate="applyFilter()"
-                      data-dismiss="modal">Import</button>
-
+            <div class="modal-body">
+              <form role="form" id="importForm">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Year</label>
+                  <input type="text" class="form-control" id="year" value.bind="year">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Quarter</label>
+                  <select class="form-control" name="quarter" id="selectQuarter">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Upload a file</label>
+                  <input id="uploadFile" type="file">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" click.delegate="csvJSON()"
+                          data-dismiss="modal">Import
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

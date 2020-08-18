@@ -1,9 +1,9 @@
-import {inject} from 'aurelia-dependency-injection';
-import {autoinject} from 'aurelia-framework';
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {MarketdataService} from '../../service/marketdata-service';
-import {VaadinListView} from '../vaadin-list/vaadin-listview';
-import {MarketdataCompanies} from '../../data/MarketdataCompanies';
+import { inject } from 'aurelia-dependency-injection';
+import { autoinject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { MarketdataService } from '../../service/marketdata-service';
+import { VaadinListView } from '../vaadin-list/vaadin-listview';
+import { MarketdataCompanies } from '../../data/MarketdataCompanies';
 
 @autoinject
 @inject(VaadinListView, MarketdataService, EventAggregator)
@@ -17,11 +17,11 @@ export class Header {
   }
 
   bind() {
-    document.getElementById('upload').addEventListener('change', upload, false);
+    //let importedFile = document.getElementById('uploadFile');
+    //document.getElementById('uploadFile').addEventListener('uploadFile', csvJSON, false);
   }
 
-  attached() {
-  }
+  attached() { }
 
   submitData() {
     let company = {
@@ -55,7 +55,6 @@ export class Header {
     //   filterResult = filterResult.result;
     // }
     filterResult = await this.marketdataService.getFilteredCompanies(listOfFilters);
-    filterResult = filterResult.result;
     this.ea.publish(new MarketdataCompanies(filterResult));
   }
 
@@ -69,8 +68,8 @@ export class Header {
       'partyId': 2,
       'groupName': 0,
       'city': 0,
-      'numEmployees': 0,
-      'annualRevenue': 0
+      'numberOfEmployees': 0,
+      'revenue': 0
     };
     let partyGroupFilters = {
       'partyId_fld0_op': 'greaterThanEqualTo',
@@ -118,11 +117,11 @@ export class Header {
                 cityFilters[value] = data[2];
                 cityFilters[ic] = 'Y';
                 break;
-              case 'numEmployees':
+              case 'numberOfEmployees':
                 partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
                 partyQuarterFilters[value] = data[2];
                 break;
-              case 'annualRevenue':
+              case 'revenue':
                 partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
                 partyQuarterFilters[value] = data[2];
                 break;
@@ -159,6 +158,28 @@ export class Header {
     'isnotblank': ''
   }
 
+  csvJSON(e) {
+    let file = e + '';
+    let lines = file.split('\n');
+
+    let result = [];
+
+    let headers = lines[0].split('\t');
+
+    for (let i = 1; i < lines.length; i++) {
+      let obj = {};
+      let currentline = lines[i].split('\t');
+
+      for (let j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j];
+      }
+
+      result.push(obj);
+    }
+
+    console.log(result);
+    return JSON.stringify(result);
+  }
 
   upload(e) {
     console.log('upload');
