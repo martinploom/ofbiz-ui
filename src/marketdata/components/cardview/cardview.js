@@ -20,7 +20,16 @@ export class Cardview {
 
   async bind() {
     const companies = await this.marketdataService.getAllCompanies();
-    this.companies = companies.listIt.completeList;
+    this.companies = companies;
+    for (let i = 0; i < this.companies.length; i++) {
+      try {
+        this.companies[i].numEmployees = this.companies[i]._toMany_PartyQuarter[0].numberOfEmployees;
+        this.companies[i].annualRevenue = this.companies[i]._toMany_PartyQuarter[0].revenue;
+        this.companies[i].officeSiteName = this.companies[i]._toMany_PartyContactMech[0]._toOne_PostalAddress.city;
+      } catch (e) {
+
+      }
+    }
   }
 
   onSelectCompany(onClick, company) {
