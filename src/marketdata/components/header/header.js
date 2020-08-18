@@ -122,15 +122,16 @@ export class Header {
   }
 
   csvJSON(csv) {
-    let lines = csv.split('\n');
+    let file = csv.toString();
+    let lines = file.split('\n');
 
     let result = [];
 
-    let headers = lines[0].split(',');
+    let headers = lines[0].split('\t');
 
     for (let i = 1; i < lines.length; i++) {
       let obj = {};
-      let currentline = lines[i].split(',');
+      let currentline = lines[i].split('\t');
 
       for (let j = 0; j < headers.length; j++) {
         obj[headers[j]] = currentline[j];
@@ -139,7 +140,8 @@ export class Header {
       result.push(obj);
     }
 
-    return JSON.stringify(result); //JSON
+    console.log(result);
+    return JSON.stringify(result);
   }
 
   upload(e) {
