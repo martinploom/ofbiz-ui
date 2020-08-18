@@ -22,11 +22,7 @@ export class VaadinListView {
 
   async attached() {
     let companies = await this.marketdataService.getAllCompanies();
-    this.companies = companies;
-    this.companyName = this.companies.groupName;
-    this.companyCode = this.companies.partyId;
-    console.log(this.companies);
-    //this.updateTable(companies.listIt.completeList);
+    this.updateTable(companies.listIt.completeList);
   }
 
   updateTable(tableContent) {
