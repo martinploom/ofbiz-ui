@@ -1,9 +1,9 @@
-import { inject } from 'aurelia-dependency-injection';
-import { autoinject } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
-import { MarketdataService } from '../../service/marketdata-service';
-import { VaadinListView } from '../vaadin-list/vaadin-listview';
-import { MarketdataCompanies } from '../../data/MarketdataCompanies';
+import {inject} from 'aurelia-dependency-injection';
+import {autoinject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {MarketdataService} from '../../service/marketdata-service';
+import {VaadinListView} from '../vaadin-list/vaadin-listview';
+import {MarketdataCompanies} from '../../data/MarketdataCompanies';
 
 @autoinject
 @inject(VaadinListView, MarketdataService, EventAggregator)
@@ -21,7 +21,8 @@ export class Header {
     //document.getElementById('uploadFile').addEventListener('uploadFile', csvJSON, false);
   }
 
-  attached() { }
+  attached() {
+  }
 
   submitData() {
     let company = {
@@ -102,31 +103,31 @@ export class Header {
             filter[ic] = 'Y';
 
             switch (data[0]) {
-              case 'partyId':
-                partyGroupFilters[op] = this.dataOperatorMapping[data[1]];
-                partyGroupFilters[value] = data[2];
-                partyGroupFilters[ic] = 'Y';
-                break;
-              case 'groupName':
-                partyGroupFilters[op] = this.dataOperatorMapping[data[1]];
-                partyGroupFilters[value] = data[2];
-                partyGroupFilters[ic] = 'Y';
-                break;
-              case 'city':
-                cityFilters[op] = this.dataOperatorMapping[data[1]];
-                cityFilters[value] = data[2];
-                cityFilters[ic] = 'Y';
-                break;
-              case 'numberOfEmployees':
-                partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
-                partyQuarterFilters[value] = data[2];
-                break;
-              case 'revenue':
-                partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
-                partyQuarterFilters[value] = data[2];
-                break;
-              default:
-                console.log('default method of switch');
+            case 'partyId':
+              partyGroupFilters[op] = this.dataOperatorMapping[data[1]];
+              partyGroupFilters[value] = data[2];
+              partyGroupFilters[ic] = 'Y';
+              break;
+            case 'groupName':
+              partyGroupFilters[op] = this.dataOperatorMapping[data[1]];
+              partyGroupFilters[value] = data[2];
+              partyGroupFilters[ic] = 'Y';
+              break;
+            case 'city':
+              cityFilters[op] = this.dataOperatorMapping[data[1]];
+              cityFilters[value] = data[2];
+              cityFilters[ic] = 'Y';
+              break;
+            case 'numberOfEmployees':
+              partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
+              partyQuarterFilters[value] = data[2];
+              break;
+            case 'revenue':
+              partyQuarterFilters[op] = this.dataOperatorMapping[data[1]];
+              partyQuarterFilters[value] = data[2];
+              break;
+            default:
+              console.log('default method of switch');
             }
             // console.log('This is filter');
             // console.log(filter);
@@ -157,7 +158,7 @@ export class Header {
     'isblank': 'empty',
     'isnotblank': ''
   }
-
+  /*
   csvJSON(e) {
     let file = e + '';
     let lines = file.split('\n');
@@ -177,27 +178,7 @@ export class Header {
       result.push(obj);
     }
 
-    console.log(result);
+    //console.log(result);
     return JSON.stringify(result);
-  }
-
-  upload(e) {
-    console.log('upload');
-    console.log(e);
-    let data = null;
-    let file = e.target.files[0];
-
-    let reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function (event) {
-      let csvData = event.target.result;
-
-      let parsedCSV = d3.csv.parseRows(csvData);
-
-      parsedCSV.forEach(function (d, i) {
-        if (i == 0) return true; // skip the header
-        document.getElementById(d[0]).value = d[1];
-      });
-    };
-  }
+  } */
 }

@@ -35,7 +35,7 @@ export class DetailedView {
     for (let i = 0; i < this.companyTimeperiodInfo.length; i++) {
       this.year = this.companyTimeperiodInfo[0].year_;
       this.avgEmployees += this.companyTimeperiodInfo[i].numberOfEmployees / this.companyTimeperiodInfo.length;
-      this.totalRevenue += this.companyTimeperiodInfo[i].revenue;
+      this.totalRevenue = this.companyTimeperiodInfo[0].revenue;
       this.importDate = new Date(this.companyTimeperiodInfo[i].dateImported);
     }
 
