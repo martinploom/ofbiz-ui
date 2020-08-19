@@ -77,7 +77,7 @@ export class MarketdataService {
     const body = JSON.stringify({
       'areRelationResultsMandatory': comboRelations,
       'inputFields': listOfFilters[0],
-      'fieldList': ['partyId', 'groupName'],
+      'fieldList': ['partyId', 'groupName', 'logoImageUrl'],
       'entityRelations': {
         '_toMany_PartyContactMech': {
           'areRelationResultsMandatory': partyContactMechRelations,
