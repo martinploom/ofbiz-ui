@@ -18,7 +18,7 @@ export class Header {
 
   bind() {
     //let importedFile = document.getElementById('uploadFile');
-    //document.getElementById('uploadFile').addEventListener('uploadFile', csvJSON, false);
+    document.getElementById('upload').addEventListener('change', upload, false);
   }
 
   attached() { }
@@ -121,7 +121,7 @@ export class Header {
     'isblank': 'empty',
     'isnotblank': ''
   }
-
+  /*
   csvJSON(e) {
     let file = e + '';
     let lines = file.split('\n');
@@ -141,27 +141,27 @@ export class Header {
       result.push(obj);
     }
 
-    console.log(result);
+    //console.log(result);
     return JSON.stringify(result);
-  }
+  } */
 
+  /*
   upload(e) {
-    console.log('upload');
-    console.log(e);
-    var data = null;
-    var file = e.target.files[0];
+    let file = e.target.files[0];
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.readAsText(file);
-    reader.onload = function (event) {
-      var csvData = event.target.result;
+    reader.onload = function(event) {
+      let csvData = event.target.result;
 
-      var parsedCSV = d3.csv.parseRows(csvData);
+      let parsedCSV = d3.csv.parseRows(csvData);
 
-      parsedCSV.forEach(function (d, i) {
+      parsedCSV.forEach(function(d, i) {
+        // eslint-disable-next-line eqeqeq
         if (i == 0) return true; // skip the header
         document.getElementById(d[0]).value = d[1];
       });
-    }
-  }
+    };
+    //console.log(csvData);
+  } */
 }
