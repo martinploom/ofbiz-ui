@@ -60,18 +60,52 @@ export class MarketdataService {
     }
   }
 
-  async getFilteredCompanies(body) {
+  async getFilteredCompanies(listOfFilters) {
+    let partyGroupRelations = Object.keys(listOfFilters[0]) > 4;
+    console.log(Object.keys(listOfFilters[0]).length);
+    console.log(partyGroupRelations);
+    let partyContactMechRelations = Object.keys(listOfFilters[1]).length > 0;
+    console.log(Object.keys(listOfFilters[1]).length);
+    console.log(partyContactMechRelations);
+    let partyQuarterRelations = Object.keys(listOfFilters[2]).length > 4;
+    console.log(Object.keys(listOfFilters[2]).length);
+    console.log(partyQuarterRelations);
+    let comboRelations = partyGroupRelations || partyContactMechRelations || partyQuarterRelations;
+    console.log(comboRelations);
+
+
+    const body = JSON.stringify({
+      'areRelationResultsMandatory': comboRelations,
+      'inputFields': listOfFilters[0],
+      'fieldList': ['partyId', 'groupName'],
+      'entityRelations': {
+        '_toMany_PartyContactMech': {
+          'areRelationResultsMandatory': partyContactMechRelations,
+          'fieldList': ['contactMechId'],
+          'entityRelations': {
+            '_toOne_PostalAddress': {
+              'areRelationResultsMandatory': partyContactMechRelations,
+              'inputFields': listOfFilters[1],
+              'fieldList': ['city']
+            }
+          }
+        },
+        '_toMany_PartyQuarter': {
+          'areRelationResultsMandatory': partyQuarterRelations,
+          'inputFields': listOfFilters[2],
+          'fieldList': ['revenue', 'numberOfEmployees']
+        }
+      }
+    });
+
+    console.log(body);
     console.log('getFilteredCompanies');
     try {
       const response = await this.httpClient.fetch(
-        `${this.baseUrl}/services/performFilteredSearch`,
+        `${this.baseUrl}/entityquery/PartyGroup`,
         {
           method: 'POST',
-          body: JSON.stringify({
-            filterParameters: body,
-            entityName: 'PartyGroup'
-          }
-          )
+          body: body
         });
       return await response.json();
     } catch (e) {

@@ -27,21 +27,22 @@ export class VaadinListView {
     this.companies = companies;
     // console.log(this.companies);
     // console.log(this.companies[0]._toMany_PartyQuarter[0].numberOfEmployees);
-    for (let i = 0; i < this.companies.length; i++) {
-      try {
-        this.companies[i].numEmployees = this.companies[i]._toMany_PartyQuarter[0].numberOfEmployees;
-        this.companies[i].annualRevenue = this.companies[i]._toMany_PartyQuarter[0].revenue;
-        this.companies[i].officeSiteName = this.companies[i]._toMany_PartyContactMech[0]._toOne_PostalAddress.city;
-      } catch (e) {
 
-      }
-    }
     this.updateTable(this.companies);
   }
 
   updateTable(tableContent) {
     const grid = document.querySelector('vaadin-grid');
     this.initGridColumns();
+    for (let i = 0; i < tableContent.length; i++) {
+      try {
+        tableContent[i].numEmployees = tableContent[i]._toMany_PartyQuarter[0].numberOfEmployees;
+        tableContent[i].annualRevenue = tableContent[i]._toMany_PartyQuarter[0].revenue;
+        tableContent[i].officeSiteName = tableContent[i]._toMany_PartyContactMech[0]._toOne_PostalAddress.city;
+      } catch (e) {
+
+      }
+    }
     grid.items = tableContent;
   }
 
